@@ -1,14 +1,10 @@
 <template>
     <section class="side">
         <ul>
-            <router-link
-                :class="{ active: routeId === item.meta.id }"
-                :to="{ path: item.path }"
-                tag="li"
-                v-for="(item, index) in routeList"
-                :key="index"
-            >
-                <span>{{ item.meta.name }}</span>
+            <router-link :to="{ path: item.path }" v-for="(item, index) in routeList" :key="index">
+                <li :class="{ active: routeId === item.meta.id }">
+                    <span>{{ item.meta.name }}</span>
+                </li>
             </router-link>
         </ul>
     </section>
@@ -32,7 +28,7 @@
 <style lang="less" scoped>
     @import '../assets/style/variable.less';
     .side {
-        width: 250px;
+        width: 290px;
         height: 100%;
         border-right: 1px solid #e0e0e0;
         background-color: var(--menu-bgcolor);
@@ -42,6 +38,10 @@
         }
 
         li {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0 10px 20px;
+            color: var(--font-color);
             span {
                 font-size: @font-size-medium-sm;
             }

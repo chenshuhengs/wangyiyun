@@ -24,7 +24,9 @@
         components: { Theme, search },
         methods: {
             // 回到主页
-            homepage() {},
+            homepage() {
+                this.$router.push('/')
+            },
             // 缩小
             narrow() {
                 if (isFullscreen()) {
