@@ -4,6 +4,7 @@ import router from './router'
 //根元素
 import App from './App.vue'
 
+import './requestConfig/axios'
 // 初始化样式
 import '@/assets/style/app.less'
 import 'element-ui/lib/theme-chalk/index.css'

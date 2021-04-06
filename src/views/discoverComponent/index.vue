@@ -2,7 +2,12 @@
     发现音乐
 -->
 <template>
-    <section class="song"></section>
+    <section class="song">
+        <Tabs :tableList="tableList"></Tabs>
+        <div class="content">
+            <router-view></router-view>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -10,11 +15,12 @@
         name: 'discoverComponent',
         data() {
             return {
+                activeName: 'personality',
                 tableList: [],
             }
         },
         created() {
-            this.tableList = this.$router.options.routes[0].children.filter(e => e.meta.show === false)
+            this.tableList = this.$router.options.routes[0].children[0].children
         },
         methods: {},
     }
@@ -22,25 +28,11 @@
 
 <style lang="less" scoped>
     .song {
-        .tab-item {
-            /deep/ .el-tabs__nav-wrap::after {
-                background-color: #fff;
-            }
-            /deep/ .el-tabs__active-bar {
-                background: red;
-            }
-            /deep/ .el-tabs__item.is-active {
-                font-size: 22px;
-                color: #000;
-                &:hover {
-                    color: #000;
-                }
-            }
-            /deep/ .el-tabs__item {
-                &:hover {
-                    color: red;
-                }
-            }
+        width: 100%;
+        height: 100%;
+        .content {
+            width: 100%;
+            height: 100%;
         }
     }
 </style>

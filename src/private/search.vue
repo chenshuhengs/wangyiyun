@@ -1,15 +1,17 @@
 <template>
     <section class="search">
-        <input
-            type="text"
-            v-on:click="onClickInput"
-            @input="onInput"
-            @keypress.enter="onEnterPress"
-            v-model.trim="searchValue"
-            placeholder="搜索"
-            ref="input"
-        />
-        <Icon :size="9" name="fangdajing" class="icon"></Icon>
+        <div>
+            <input
+                type="text"
+                v-on:click="onClickInput"
+                @input="onInput"
+                @keypress.enter="onEnterPress"
+                v-model.trim="searchValue"
+                placeholder="搜索"
+                ref="input"
+            />
+            <Icon :size="9" name="fangdajing" class="icon"></Icon>
+        </div>
     </section>
 </template>
 
@@ -27,14 +29,17 @@
 
 <style lang="less" scoped>
     .search {
-        position: relative;
-        width: 150px;
+        // position: relative;
+        // width: 150px;
+        div {
+            position: relative;
+        }
         input {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 25px;
-            padding: 0 0 0 30px;
+            padding-left: 30px;
             box-sizing: border-box;
             border-radius: 20px;
             border: none;

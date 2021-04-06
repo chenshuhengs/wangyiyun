@@ -85,21 +85,15 @@
 
         .theme-item {
             width: calc(~'100% / 3');
-            flex-wrap: wrap;
-            .flex-center();
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
             padding-top: 15px;
-            div,
-            p {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
             .theme-icon {
                 width: 25px;
                 height: 25px;
                 border-radius: 50%;
-                // margin-bottom: 4px;
             }
         }
     }

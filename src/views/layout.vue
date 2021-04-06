@@ -30,7 +30,20 @@
             .main {
                 width: 100%;
                 height: 100%;
-                padding: 0 30px;
+                // margin: 30px 50px 0 50px;
+                padding: 0 50px;
+                // overflow: hidden;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: #ccc;
+                    border-radius: 5px;
+                }
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #636060;
+                }
             }
         }
     }

@@ -13,7 +13,6 @@
 <script>
     export default {
         name: 'sideBar',
-        created() {},
         computed: {
             routeList() {
                 return this.$router.options.routes[0].children.filter(e => e.meta.show)
@@ -28,7 +27,7 @@
 <style lang="less" scoped>
     @import '../assets/style/variable.less';
     .side {
-        width: 290px;
+        width: 320px;
         height: 100%;
         border-right: 1px solid #e0e0e0;
         background-color: var(--menu-bgcolor);
