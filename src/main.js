@@ -3,7 +3,7 @@ import Vue from 'vue'
 import router from './router'
 //根元素
 import App from './App.vue'
-
+import store from './store'
 import './requestConfig/axios'
 // 初始化样式
 import '@/assets/style/app.less'
@@ -25,7 +25,4 @@ Vue.use(VueLazyload, {
 
 Vue.config.productionTip = false
 
-new Vue({
-    router,
-    render: h => h(App),
-}).$mount('#app')
+new Vue({ store, router, render: h => h(App) }).$mount('#app')

@@ -3,7 +3,6 @@
 -->
 <template>
     <section class="mv">
-        <slot name="title"></slot>
         <slot name="content"></slot>
     </section>
 </template>

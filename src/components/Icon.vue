@@ -36,7 +36,7 @@
             },
         },
         render() {
-            const Icon = <i onClick={this.onClick} class={`iconfont icon-component ${this.getIconCls()}`} style={this.getIconStyle()} />
+            const Icon = <i onClick={this.onClick} class={`am-icon iconfont icon-component ${this.getIconCls()}`} style={this.getIconStyle()} />
 
             if (this.backdrop) {
                 const backDropSizeRatio = 1.56
@@ -55,11 +55,14 @@
 <style lang="less" scoped>
     .icon-component {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     span {
-        display: inline-block;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        // display: inline-block;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
     }
 </style>

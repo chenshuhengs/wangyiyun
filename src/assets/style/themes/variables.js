@@ -1,8 +1,9 @@
 export default {
+    ['--tab-bgcolor']: '#252525',
     ['--body-bgcolor']: '#252525',
     ['--light-bgcolor']: '#2e2e2e',
 
-    ['--font-color']: '#b1b1b1',
+    ['--font-color']: '#fff',
     ['--font-color-shallow']: '#6f6f6f',
     ['--font-color-white']: '#dcdde4',
     ['--font-color-grey']: '#5C5C5C',

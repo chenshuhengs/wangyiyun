@@ -21,9 +21,9 @@
         render() {
             const mucieType = (
                 <span
-                    class={`defaultstyle ${this.typeTitle === '数字单曲' || this.typeTitle === '广告' ? 'bluetitle' : ''}${
-                        this.typeTitle === '新碟首发' || this.typeTitle === 'VIP专享' || this.typeTitle === '独家' ? 'redtitle' : ''
-                    }`}
+                    class={`defaultstyle ${
+                        this.typeTitle === '数字单曲' || this.typeTitle === '广告' || this.typeTitle === 'VIP专享' ? 'bluetitle' : ''
+                    }${this.typeTitle === '新碟首发' || this.typeTitle === '独家' ? 'redtitle' : ''}`}
                 >
                     {this.typeTitle ? this.typeTitle : ''}
                 </span>

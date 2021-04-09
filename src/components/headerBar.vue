@@ -85,6 +85,7 @@
         .right {
             display: flex;
             align-items: center;
+            color: var(--font-color);
             .search-wrap {
                 margin-right: 16px;
             }

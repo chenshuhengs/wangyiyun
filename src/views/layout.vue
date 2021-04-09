@@ -3,7 +3,7 @@
         <headerBar class="header"></headerBar>
         <section class="content">
             <sideBar></sideBar>
-            <main class="main">
+            <main class="main" ref="main">
                 <router-view></router-view>
             </main>
         </section>
@@ -11,8 +11,15 @@
 </template>
 
 <script>
+    import Bus from '@/utils/bus.js'
+    import backTop from '@/utils/backTop.js'
     export default {
         name: 'layout',
+        created() {
+            Bus.$on('callBack', () => {
+                backTop(document.getElementsByClassName('main')[1])
+            })
+        },
     }
 </script>
 
@@ -24,16 +31,15 @@
         .content {
             display: flex;
             width: 100%;
-            height: 100%;
             overflow: hidden;
-            height: calc(~'100% - 50px');
+            height: calc(~'100% - 120px');
             .main {
                 width: 100%;
                 height: 100%;
-                // margin: 30px 50px 0 50px;
                 padding: 0 50px;
-                // overflow: hidden;
+                overflow: hidden;
                 overflow-y: scroll;
+                background-color: var(--body-bgcolor);
                 &::-webkit-scrollbar {
                     width: 5px;
                 }

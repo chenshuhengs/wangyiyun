@@ -1,9 +1,10 @@
 // 白色主题  为默认 主题
 export default {
+    ['--tab-bgcolor']: '#fff',
     ['--body-bgcolor']: '#fff',
     ['--light-bgcolor']: '#f5f5f5',
 
-    ['--font-color']: '#4a4a4a',
+    ['--font-color']: '#000',
     ['--font-color-shallow']: '#404040',
     ['--font-color-white']: '#333333',
     ['--font-color-grey']: '#5c5c5c',
