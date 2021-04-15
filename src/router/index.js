@@ -46,6 +46,17 @@ const routes = [
                         },
                     },
                     {
+                        path: '/discover/songsheet/boutique',
+                        name: 'boutique',
+                        component: () => import('@/views/discoverComponent/songSheetComponent/boutique'),
+                        meta: {
+                            id: 1,
+                            show: false,
+                            name: undefined,
+                            label: undefined,
+                        },
+                    },
+                    {
                         path: '/discover/anchor',
                         name: 'anchorComponent',
                         component: () => import('@/views/discoverComponent/anchorComponent'),

@@ -22,8 +22,18 @@
             const mucieType = (
                 <span
                     class={`defaultstyle ${
-                        this.typeTitle === '数字单曲' || this.typeTitle === '广告' || this.typeTitle === 'VIP专享' ? 'bluetitle' : ''
-                    }${this.typeTitle === '新碟首发' || this.typeTitle === '独家' ? 'redtitle' : ''}`}
+                        this.typeTitle === '数字单曲' ||
+                        this.typeTitle === '广告' ||
+                        this.typeTitle === '独家策划' ||
+                        this.typeTitle === 'VIP专享' ||
+                        this.typeTitle === '特别策划'
+                            ? 'bluetitle'
+                            : ''
+                    }${
+                        this.typeTitle === '新碟首发' || this.typeTitle === '音乐故事' || this.typeTitle === '新歌首发' || this.typeTitle === '独家'
+                            ? 'redtitle'
+                            : ''
+                    }`}
                 >
                     {this.typeTitle ? this.typeTitle : ''}
                 </span>

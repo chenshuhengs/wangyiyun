@@ -26,7 +26,7 @@
     @import '../assets/style/variable.less';
     .tabs {
         width: 100%;
-        z-index: 999;
+        z-index: 900;
         position: fixed;
         background-color: var(--tab-bgcolor);
         ul {

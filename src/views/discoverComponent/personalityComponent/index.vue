@@ -7,13 +7,13 @@
         <section class="content">
             <!-- 推荐歌单 -->
             <div class="recommend">
-                <h5>推荐歌单 🌟</h5>
+                <router-link to="/discover/songsheet">推荐歌单 🌟</router-link>
                 <ul>
                     <li v-for="(music, index) in recommendMusic" :key="index">
                         <div>
                             <img :src="music.picUrl" alt="" />
                             <i class="iconfont icon-play"></i>
-                            <span class="iconfont icon-insert-right">{{ playCount(music.playCount) }}</span>
+                            <span class="iconfont icon-insert-right">{{ playCountFun(music.playCount) }}</span>
                         </div>
                         <span>{{ music.name }}</span>
                     </li>
@@ -22,7 +22,7 @@
             <!-- 独家放送 MV -->
             <mvComponent>
                 <template #content>
-                    <h5 v-if="sole">{{ sole.name }} 🌟</h5>
+                    <router-link to="/discover/songsheet">{{ sole.name }} 🌟</router-link>
                     <ul class="sole">
                         <li v-for="(item, index) in sole.result" :key="index">
                             <div>
@@ -37,7 +37,7 @@
             <!-- 最新音乐 -->
             <mvComponent>
                 <template #content>
-                    <h5>最新音乐 🌟</h5>
+                    <router-link to="/discover/songsheet">最新音乐🌟</router-link>
                     <ul class="newest-music">
                         <li class="music" v-for="(music, index) in newestMusic" :key="index">
                             <div class="left">
@@ -63,7 +63,7 @@
             <!-- 推荐MV -->
             <mvComponent>
                 <template #content>
-                    <h5>推荐MV 🌟</h5>
+                    <router-link to="/discover/songsheet">推荐MV🌟</router-link>
                     <ul class="mv">
                         <li v-for="(item, index) in MV" :key="index" ref="li" :class="[screenWidth > 1250 ? 'fourimgblock' : 'fourimg']">
                             <img :src="item.picUrl" alt="" />
@@ -82,6 +82,7 @@
 
 <script>
     import Tips from '@/components/Tips'
+    import { playCount } from '@/utils/'
     import { throttle } from 'lodash-es'
     import mvComponent from './mvComponent'
     import { getBanner } from '@/api/banner.js'
@@ -129,8 +130,8 @@
             calc() {
                 this.screenWidth = document.body.clientWidth
             },
-            playCount(count) {
-                return `${String(count).slice(0, String(count.playCount).length - 4)}万`
+            playCountFun(count) {
+                return playCount(count)
             },
         },
         mounted() {
@@ -143,10 +144,14 @@
     @import '../../../assets/style/mixins.less';
     section {
         .content {
-            h5 {
-                padding: 20px 0 10px 0;
+            a {
                 margin: 0;
+                display: block;
+                padding: 20px 0 10px 0;
                 color: var(--font-color);
+                &:hover {
+                    .cursor();
+                }
             }
             span,
             p {

@@ -17,7 +17,10 @@
         name: 'layout',
         created() {
             Bus.$on('callBack', () => {
-                backTop(document.getElementsByClassName('main')[1])
+                backTop(document.getElementsByClassName('main')[1], true)
+            })
+            Bus.$on('BackTop', () => {
+                backTop(document.getElementsByClassName('main')[1], false)
             })
         },
     }

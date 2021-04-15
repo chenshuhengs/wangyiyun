@@ -20,7 +20,7 @@
             }
         },
         created() {
-            this.tableList = this.$router.options.routes[0].children[0].children
+            this.tableList = this.$router.options.routes[0].children[0].children.filter(e => e.meta.name)
         },
         methods: {},
     }
@@ -33,7 +33,8 @@
         .content {
             width: 100%;
             height: 100%;
-            padding-top: 65px;
+            box-sizing: border-box;
+            padding-top: 45px;
         }
     }
 </style>

@@ -1,7 +1,87 @@
+.line {
+    white-space: nowrap;
+    overflow: hidden; /*超出部分隐藏*/
+    text-overflow: ellipsis; /*用...代替超出部分*/
+}
+.flex(@wrap:wrap) {
+    display: flex;
+    flex-wrap: @wrap;
+    justify-content: space-between;
+}
+.hover(@color:#000) {
+    color: @color;
+}
 .round(@d) {
     width: @d;
     height: @d;
     border-radius: 50%;
+}
+// 图片大小
+.imgsize(@radius:10px) {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 8px;
+    border-radius: @radius;
+}
+.fadeIn() {
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+// 旋转
+.rotate1() {
+    @keyframes rotate1 {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+}
+.rotate2() {
+    @keyframes rotate2 {
+        0% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+// 两行 后省略
+.twoline(@size:18px,@height:28px) {
+    font-size: @size;
+    line-height: @height;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+.cursor() {
+    cursor: pointer;
+}
+// 鼠标移入 透明度动画
+.opacity() {
+    animation: 1s fadeIn forwards;
+}
+.rotate(@name) {
+    animation: 0.3s @name forwards;
+}
+
+.abs-stretch {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
 }
 // 定位位置
 .position1(@right:0,@top:0) {
@@ -19,46 +99,10 @@
     left: @left;
     top: @top;
 }
-// 图片大小
-.imgsize(@radius:10px) {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 8px;
-    border-radius: @radius;
-}
-// 鼠标移入 透明度动画
-.opacity() {
-    animation: 1s fadeIn forwards;
-}
-.fadeIn() {
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-}
-.line {
-    white-space: nowrap;
-    overflow: hidden; /*超出部分隐藏*/
-    text-overflow: ellipsis; /*用...代替超出部分*/
-}
-// 两行 后省略
-.twoline(@size:18px,@height:28px) {
-    font-size: @size;
-    line-height: @height;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-}
-.flex(@wrap:wrap) {
-    display: flex;
-    flex-wrap: @wrap;
-    justify-content: space-between;
+.position4(@left:0,@bottom:0) {
+    position: absolute;
+    left: @left;
+    bottom: @bottom;
 }
 .flex-center(@direction:row,@justify:center,@wrap:nowrap) {
     display: flex;

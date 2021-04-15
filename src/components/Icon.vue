@@ -14,6 +14,10 @@
                 type: Boolean,
                 default: false,
             },
+            typeName: {
+                type: String,
+                default: '',
+            },
         },
         data() {
             return {}
@@ -36,7 +40,7 @@
             },
         },
         render() {
-            const Icon = <i onClick={this.onClick} class={`am-icon iconfont icon-component ${this.getIconCls()}`} style={this.getIconStyle()} />
+            const Icon = <i onClick={this.onClick} class={`am-icon iconfont icon-component ${this.getIconCls()}`} style={this.getIconStyle()}></i>
 
             if (this.backdrop) {
                 const backDropSizeRatio = 1.56
@@ -58,11 +62,5 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    span {
-        // display: inline-block;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
     }
 </style>

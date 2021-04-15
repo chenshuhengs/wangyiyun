@@ -1,9 +1,9 @@
 <template>
     <section class="banner">
-        <el-carousel :interval="4000" type="card" height="250px">
+        <el-carousel :interval="4000" type="card" :height="`${height}px`">
             <el-carousel-item v-for="(item, index) in bannerList" :key="index">
                 <div class="content">
-                    <img :src="item.imageUrl" alt="" />
+                    <img :src="item.imageUrl ? item.imageUrl : item.pic" alt="" />
                     <musicType :typeTitle="item.typeTitle"></musicType>
                 </div>
             </el-carousel-item>
@@ -12,7 +12,9 @@
 </template>
 
 <script>
+    import { throttle } from 'lodash-es'
     import musicType from '@/private/musicType'
+    import bannerWidth from '@/utils/bannerWidth.js'
     export default {
         name: 'Banner',
         props: {
@@ -24,7 +26,20 @@
             musicType,
         },
         data() {
-            return {}
+            return {
+                height: 0,
+            }
+        },
+        created() {
+            this.height = bannerWidth(document.body.clientWidth)
+        },
+        methods: {
+            calc() {
+                this.height = bannerWidth(document.body.clientWidth)
+            },
+        },
+        mounted() {
+            window.addEventListener('resize', throttle(this.calc, 300))
         },
     }
 </script>

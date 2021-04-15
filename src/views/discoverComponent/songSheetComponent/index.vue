@@ -4,44 +4,78 @@
 <template>
     <section class="songsheet">
         <!-- 头部 精品歌单 -->
-        <qualitySongList></qualitySongList>
-        <tabBar :tags="tags"></tabBar>
+        <transition name="fade">
+            <qualitySongList v-if="fineMusic.more"></qualitySongList>
+        </transition>
+        <tabBar :tags="tags" @tabClick="pageJump"></tabBar>
+        <section class="content">
+            <contentList :musicList="musicList"></contentList>
+        </section>
+        <!-- 分页 -->
+        <paging :total="total" @pageJump="pageJump"></paging>
     </section>
 </template>
 
 <script>
-    import Popup from './Popup'
     import tabBar from './tabBar'
+    import Bus from '@/utils/bus.js'
+    import contentList from './contentList'
+    import qualitySongList from './qualitySongList'
+    import { getSongListTypes } from '@/api/songsheet.js'
     import { createNamespacedHelpers } from 'vuex'
-    import qualitySongList from '@/private/qualitySongList'
-    import { getplaylist, getBoutiqueSong, getSongListTypes } from '@/api/songsheet.js'
-
     const discoverStore = createNamespacedHelpers('discoverStore')
     export default {
         name: 'songSheetComponent',
         components: {
             tabBar,
+            contentList,
             qualitySongList,
         },
         data() {
             return {
                 tags: [],
-                getBoutiqueSong: [], //精品歌单
+                playlist: {}, //精品歌单
+                musicList: [],
             }
         },
         created() {
-            getplaylist().then(res => {
-                // console.log(res)
+            Bus.$on('contentList', name => {
+                this.getBoutiqueList({
+                    cat: name,
+                    limit: 40,
+                    offset: 1,
+                }).then(res => {
+                    this.musicList = res.playlists
+                })
+            })
+            this.getBoutiqueSong()
+            this.getBoutiqueList({
+                cat: this.activeLable,
+                limit: 40,
+                offset: 1,
+            }).then(res => {
+                this.musicList = res.playlists
             })
             getSongListTypes().then(res => {
                 this.tags = res.data.tags
             })
-            getBoutiqueSong().then(res => {
-                // console.log(res.data)
-            })
+        },
+        methods: {
+            ...discoverStore.mapActions(['getBoutiqueSong', 'getBoutiqueList']),
+            // 分页
+            pageJump(page = 1) {
+                this.getBoutiqueList({
+                    limit: 40,
+                    offset: page,
+                    cat: this.activeLable,
+                }).then(res => {
+                    this.musicList = res.playlists
+                })
+            },
+            // tabClick() {},
         },
         computed: {
-            ...discoverStore.mapState(['activeLable']),
+            ...discoverStore.mapState(['total', 'fineMusic', 'activeLable']),
         },
         mounted() {},
     }
