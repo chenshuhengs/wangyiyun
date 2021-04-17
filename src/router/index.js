@@ -120,6 +120,18 @@ const routes = [
                 component: () => import('@/views/shareComponent/'),
                 meta: { id: 4, show: true, name: '直播' },
             },
+            {
+                path: '/liketype/:type',
+                name: 'likeTypeCom',
+                component: () => import('@/views/router-link/likeTypeCom'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
+            {
+                path: '/discover/ranking/:id',
+                name: 'musicList',
+                component: () => import('@/views/router-link/musicList'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
         ],
     },
 ]

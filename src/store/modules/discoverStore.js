@@ -38,7 +38,6 @@ const actions = {
                 limit: data.limit,
                 cat: data.cat,
             })
-            console.log(res.data.total)
             commit('GET_TOTAL', res.data.total)
             return res
         }

@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import Bus from '@/utils/bus.js'
     import storage from 'good-storage'
     // 引入主题  1、暗色主题   2、浅色主题(默认主题)  3、红色主题
     import darkThemes from '@/assets/style/themes/variables.js'
@@ -67,7 +68,8 @@
         methods: {
             changeTheme(key) {
                 // 初始化值  value:__theme__   key:white
-                storage.set(this.THEME_KEY, key)
+                storage.set(this.THEMES_KEY, key)
+                Bus.$emit('themeColor')
                 const themeList = this.themeMap[key].file
                 Object.keys(themeList).forEach(key => {
                     const value = themeList[key]

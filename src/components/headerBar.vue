@@ -6,6 +6,8 @@
             <div @click="enlarge" class="operation green"><Icon :size="9" name="icon--"></Icon></div>
         </div>
         <div class="right">
+            <div class="login" @click="login">登录</div>
+            <div class="portrait"></div>
             <div class="search-wrap"><search></search></div>
             <Theme></Theme>
         </div>
@@ -15,6 +17,8 @@
 <script>
     import Theme from '@/private/theme'
     import search from '@/private/search'
+    import { createNamespacedHelpers } from 'vuex'
+    const loginStore = createNamespacedHelpers('loginStore')
     import { requestFullScreen, exitFullscreen, isFullscreen } from '@/utils/pageScaling.js'
     export default {
         name: 'headerBar',
@@ -23,6 +27,10 @@
         },
         components: { Theme, search },
         methods: {
+            ...loginStore.mapMutations(['LOGIN_STATE']),
+            login() {
+                this.LOGIN_STATE(true)
+            },
             // 回到主页
             homepage() {
                 this.$router.push('/')
@@ -37,6 +45,9 @@
             enlarge() {
                 requestFullScreen()
             },
+        },
+        computed: {
+            ...loginStore.mapState(['loginState']),
         },
     }
 </script>
@@ -86,6 +97,15 @@
             display: flex;
             align-items: center;
             color: var(--font-color);
+            .login {
+                font-size: 20px;
+                color: #6b6868;
+                margin-right: 30px;
+                &:hover {
+                    color: #000;
+                    .cursor();
+                }
+            }
             .search-wrap {
                 margin-right: 16px;
             }
