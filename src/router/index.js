@@ -123,13 +123,19 @@ const routes = [
             {
                 path: '/liketype/:type',
                 name: 'likeTypeCom',
-                component: () => import('@/views/router-link/likeTypeCom'),
+                component: () => import('@/views/router-link/anchorSubroute/likeTypeCom'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
             {
                 path: '/discover/ranking/:id',
                 name: 'musicList',
-                component: () => import('@/views/router-link/musicList'),
+                component: () => import('@/views/router-link/rankingSubroute/musicList'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
+            {
+                path: '/discover/user/:key',
+                name: 'userInit',
+                component: () => import('@/views/router-link/user/userInit'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
         ],

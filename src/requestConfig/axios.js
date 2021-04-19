@@ -5,7 +5,8 @@ import { Loading } from 'element-ui'
 axios.create({
     timeout: 2500,
 })
-axios.defaults.baseURL = 'http://localhost:4000'
+
+axios.defaults.baseURL = 'http://localhost:4000/'
 axios.defaults.withCredentials = true
 let loading = null
 // 添加请求拦截器

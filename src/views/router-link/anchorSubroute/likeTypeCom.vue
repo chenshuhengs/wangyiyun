@@ -1,3 +1,6 @@
+<!-- 
+    主播电台关联路由（并非子路由）
+-->
 <template>
     <section class="like-type">
         <div class="header">{{ name }}</div>
@@ -51,7 +54,7 @@
 </script>
 
 <style lang="less" scoped>
-    @import '../../assets/style/mixins.less';
+    @import '../../../assets/style/mixins.less';
     .like-type {
         box-sizing: border-box;
         .header {

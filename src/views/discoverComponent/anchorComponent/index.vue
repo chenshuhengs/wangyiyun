@@ -113,7 +113,6 @@
                 domBollFun(direction, domObj)
             },
             likeType(item) {
-                console.log(item)
                 this.$router.push({
                     path: `/liketype/${item.id}`,
                     query: {

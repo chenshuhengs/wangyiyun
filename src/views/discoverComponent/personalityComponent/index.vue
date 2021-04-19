@@ -106,9 +106,6 @@
             mvComponent,
         },
         created() {
-            getDj().then(res => {
-                // console.log(res)
-            })
             getMv().then(res => {
                 this.MV = res.data.result
             })

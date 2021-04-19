@@ -8,10 +8,8 @@ import './requestConfig/axios'
 // 初始化样式
 import '@/assets/style/app.less'
 import 'element-ui/lib/theme-chalk/index.css'
-
 import ElementUI from 'element-ui'
 import VueLazyload from 'vue-lazyload'
-
 // 注册公共组件
 import componentFn from '@/utils/componentFn'
 const EMPTY_IMG = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'

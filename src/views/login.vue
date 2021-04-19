@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    import Bus from '@/utils/bus'
+    import storage from 'good-storage'
     import { login } from '@/api/login'
     import { createNamespacedHelpers } from 'vuex'
     const loginStore = createNamespacedHelpers('loginStore')
@@ -36,7 +38,7 @@
             }
         },
         methods: {
-            ...loginStore.mapMutations(['LOGIN_STATE']),
+            ...loginStore.mapMutations(['USER_ID', 'USER_NAME', 'USER_AVATAR', 'LOGIN_STATE']),
             rotate() {
                 this.count++
             },
@@ -58,7 +60,16 @@
                                 message: '登录成功',
                                 type: 'success',
                             })
+                            storage.set('id', res.data.account.id)
+                            storage.set('token', res.data.token)
+                            storage.set('name', res.data.profile.nickname)
+                            storage.set('avatar', res.data.profile.avatarUrl)
+                            console.log(res.data.account.id)
+                            this.USER_ID(res.data.account.id)
+                            this.USER_NAME(res.data.profile.nickname)
+                            this.USER_AVATAR(res.data.profile.avatarUrl)
                             this.LOGIN_STATE(false)
+                            Bus.$emit('loginOk')
                         } else {
                             this.$message.error('登录失败，请重新登录')
                         }
