@@ -9,4 +9,7 @@ export const getUserdynamic = params => axios.get(`/user/event?uid=${params}`)
 export const getFollow = params => axios.get(`/user/follows?uid=${params}`)
 
 // 粉丝
-export const getFans = params => axios.get(`/user/followeds?uid=${params}`)
+export const getFans = params => axios.get(`/user/followeds?uid=`)
+
+// 收藏歌单 / 取消收藏
+export const getSubscribe = params => axios.get(`/playlist/subscribe?t=${params.type}&id=${params.id}`)

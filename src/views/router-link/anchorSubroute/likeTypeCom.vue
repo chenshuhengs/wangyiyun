@@ -57,6 +57,7 @@
     @import '../../../assets/style/mixins.less';
     .like-type {
         box-sizing: border-box;
+        padding: 0 30px;
         .header {
             font-size: 24px;
             font-weight: 700;

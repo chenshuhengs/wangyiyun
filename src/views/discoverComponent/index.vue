@@ -34,7 +34,7 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box;
-            padding-top: 45px;
+            padding: 45px 50px 0 50px;
         }
     }
 </style>

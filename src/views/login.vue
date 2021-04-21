@@ -64,12 +64,12 @@
                             storage.set('token', res.data.token)
                             storage.set('name', res.data.profile.nickname)
                             storage.set('avatar', res.data.profile.avatarUrl)
-                            console.log(res.data.account.id)
                             this.USER_ID(res.data.account.id)
                             this.USER_NAME(res.data.profile.nickname)
                             this.USER_AVATAR(res.data.profile.avatarUrl)
                             this.LOGIN_STATE(false)
                             Bus.$emit('loginOk')
+                            Bus.$emit('loginYes')
                         } else {
                             this.$message.error('登录失败，请重新登录')
                         }

@@ -53,7 +53,7 @@
             .main {
                 width: 100%;
                 height: 100%;
-                padding: 0 50px;
+                // padding: 0 50px;
                 overflow: hidden;
                 overflow-y: scroll;
                 background-color: var(--body-bgcolor);

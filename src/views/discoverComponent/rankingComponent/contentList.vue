@@ -92,10 +92,12 @@
                         }
                     }
                     .right {
-                        width: 65%;
+                        width: 70%;
                         position: relative;
                         li {
-                            .flex();
+                            display: flex;
+                            justify-content: space-between;
+                            // .flex();
                             color: #807d7d;
                             padding: 0 10px;
                             font-size: 18px;
@@ -105,12 +107,12 @@
                                 margin-right: 10px;
                             }
                             .name {
-                                width: 35%;
+                                // width: 35%;
                                 display: flex;
                                 justify-content: flex-end;
 
                                 .second {
-                                    .line();
+                                    // .line();
                                 }
                             }
                             &:nth-of-type(odd) {

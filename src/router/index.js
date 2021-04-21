@@ -138,6 +138,12 @@ const routes = [
                 component: () => import('@/views/router-link/user/userInit'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
+            {
+                path: '/discover/mv/:id',
+                name: 'mv',
+                component: () => import('@/views/router-link/mv/'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
         ],
     },
 ]

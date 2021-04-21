@@ -7,13 +7,44 @@ export function rounding(money) {
 
     return num
 }
+// 防抖
+export function debounce(func, wait) {
+    let timeout
+    if (timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => {
+        func()
+    }, wait)
+}
 
+// 播放次数
 export function playCount(count) {
     if (String(count).length > 5) {
         return `${String(count).slice(0, String(count).length - 4)}万`
     } else {
         return count
     }
+}
+
+export function timeDate(time) {
+    let date = new Date(time)
+    var month = date.getMonth() + 1 + '月'
+    var today = date.getDate() + '日'
+    return month + today
+}
+// 转换成分钟
+export function minute(time) {
+    let date = new Date(time)
+    return date.getMinutes() + ' : ' + date.getSeconds()
+}
+
+export function likeMusic(id, likeid) {
+    for (let i = 0; i < likeid.length; i++) {
+        if (likeid[i] == id) {
+            likeid.splice(i, 1)
+            return true
+        }
+    }
+    return false
 }
 
 export function domBollFun(direction, domObj) {
