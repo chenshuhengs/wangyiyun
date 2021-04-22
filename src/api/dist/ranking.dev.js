@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMvdetail = exports.getMvAddress = exports.getLikeMusic = exports.getLikeList = exports.getDynamic = exports.getPlaylist = exports.getranking = void 0;
+exports.getCommentLike = exports.getCommentMv = exports.getComment = exports.getMvSub = exports.getMvSublist = exports.getResourceLike = exports.getPlaylistMylike = exports.getDetailInfo = exports.getMvdetail = exports.getMvAddress = exports.getLikeMusic = exports.getLikeList = exports.getDynamic = exports.getPlaylist = exports.getranking = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -48,12 +48,69 @@ exports.getLikeMusic = getLikeMusic;
 
 var getMvAddress = function getMvAddress(params) {
   return _axios["default"].get("/mv/url?id=".concat(params));
-};
+}; // 获取 mv 数据
+
 
 exports.getMvAddress = getMvAddress;
 
 var getMvdetail = function getMvdetail(params) {
   return _axios["default"].get("/mv/detail?mvid=".concat(params));
-};
+}; //获取 mv 点赞转发评论数数据
+
 
 exports.getMvdetail = getMvdetail;
+
+var getDetailInfo = function getDetailInfo(params) {
+  return _axios["default"].get("/mv/detail/info?mvid=".concat(params));
+}; // 获取点赞过的视频
+
+
+exports.getDetailInfo = getDetailInfo;
+
+var getPlaylistMylike = function getPlaylistMylike(params) {
+  return _axios["default"].get("/playlist/mylike");
+}; // 资源点赞( MV,电台,视频)
+
+
+exports.getPlaylistMylike = getPlaylistMylike;
+
+var getResourceLike = function getResourceLike(params) {
+  return _axios["default"].get("/resource/like?t=".concat(params.t, "&type=").concat(params.type, "&id=").concat(params.id));
+}; // 收藏的 MV 列表
+
+
+exports.getResourceLike = getResourceLike;
+
+var getMvSublist = function getMvSublist(params) {
+  return _axios["default"].get("/mv/sublist");
+}; // 收藏/取消收藏 MV
+
+
+exports.getMvSublist = getMvSublist;
+
+var getMvSub = function getMvSub(params) {
+  return _axios["default"].get("/mv/sub?mvid=".concat(params.id, "&t=").concat(params.t));
+}; // 发送/删除评论
+
+
+exports.getMvSub = getMvSub;
+
+var getComment = function getComment(params) {
+  return _axios["default"].get("/comment?t=".concat(params.t, "&type=").concat(params.type, "&id=").concat(params.id, "&content=").concat(params.content, "&commentId=").concat(params.commentId));
+}; // mv 评论
+
+
+exports.getComment = getComment;
+
+var getCommentMv = function getCommentMv(params) {
+  return _axios["default"].get("/comment/mv?id=".concat(params.id));
+}; // 给评论点赞
+
+
+exports.getCommentMv = getCommentMv;
+
+var getCommentLike = function getCommentLike(params) {
+  return _axios["default"].get("/comment/like?id=".concat(params.id, "&cid=").concat(params.cid, "&t=").concat(params.t, "&type=").concat(params.type));
+};
+
+exports.getCommentLike = getCommentLike;

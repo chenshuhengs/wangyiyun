@@ -46,6 +46,25 @@ export function likeMusic(id, likeid) {
     }
     return false
 }
+// 视频是否点赞
+export function fabulous(id, mvList) {
+    for (let i = 0; i < mvList.length; i++) {
+        if (mvList[i].mlogBaseData.id == id) {
+            return true
+        }
+    }
+    return false
+}
+
+// 视频是否收藏
+export function queryCollection(id, queryList) {
+    for (let i = 0; i < queryList.length; i++) {
+        if (queryList[i].vid == id) {
+            return true
+        }
+    }
+    return false
+}
 
 export function domBollFun(direction, domObj) {
     let childLength = domObj.childNodes.length

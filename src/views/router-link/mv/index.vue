@@ -6,7 +6,8 @@
                 <span>MV详情</span>
             </h5>
             <div class="video">
-                <video controls autoplay :src="mvUrl">您的浏览器不支持 video 标签。</video>
+                <!-- autoplay -->
+                <video controls :src="mvUrl">您的浏览器不支持 video 标签。</video>
             </div>
             <div class="introduce">
                 <div class="top">
@@ -22,10 +23,18 @@
                     </div>
                 </div>
                 <div class="title">
-                    <div v-if="singer.data">
-                        <p>{{ singer.data.name }}</p>
+                    <p v-if="singer.data" class="name">{{ singer.data.name }}</p>
+                    <div v-if="singer.data" class="publish">
+                        <p>发布:{{ singer.data.publishTime }}</p>
+                        <p>发布:{{ singer.data.playCount }}</p>
                     </div>
-                    <p v-if="singer.data">{{ singer.data.publishTime }}</p>
+                </div>
+                <div class="encourage">
+                    <giveThumbsUp :likedCountv="likedCountv" :mvId="mv" @clickOk="clickOk"></giveThumbsUp>
+                    <Collection :mvId="mv" :subCount="subCount"></Collection>
+                </div>
+                <div>
+                    <comment :commentCount="commentCount" :mvId="mv" @commentOk="commentOk"></comment>
                 </div>
             </div>
         </div>
@@ -34,7 +43,7 @@
 </template>
 
 <script>
-    import { getMvAddress, getMvdetail } from '@/api/ranking'
+    import { getMvAddress, getMvdetail, getDetailInfo, getPlaylistMylike } from '@/api/ranking'
     export default {
         name: 'mv',
         data() {
@@ -42,7 +51,10 @@
                 mv: '',
                 mvUrl: '',
                 singer: '',
+                subCount: 0,
                 show: false,
+                likedCountv: 0,
+                commentCount: 0,
             }
         },
         created() {
@@ -51,13 +63,23 @@
                 this.mvUrl = res.data.data.url
             })
             getMvdetail(this.mv).then(res => {
+                this.subCount = res.data.data.subCount
                 this.singer = res.data
-                console.log(this.singer)
+                this.commentCount = res.data.data.commentCount
+            })
+            getDetailInfo(this.mv).then(res => {
+                this.likedCountv = res.data.likedCount //点赞次数
             })
         },
         methods: {
             callback() {
                 this.$router.go(-1)
+            },
+            clickOk(key) {
+                key ? (this.likedCountv += 1) : (this.likedCountv -= 1)
+            },
+            commentOk() {
+                this.commentCount += 1
             },
         },
     }
@@ -89,7 +111,6 @@
             }
         }
         .introduce {
-            // display: flex;
             .top {
                 display: flex;
                 align-items: center;
@@ -107,8 +128,26 @@
             }
             .title {
                 margin-top: 20px;
-                font-weight: 700;
-                letter-spacing: 3px;
+                .name {
+                    font-weight: 700;
+                    letter-spacing: 3px;
+                }
+                .publish {
+                    color: #999494;
+                    font-size: 18px;
+                    font-weight: 200;
+                    letter-spacing: 3px;
+                    display: flex;
+                    p {
+                        margin-top: 20px;
+                        margin-right: 20px;
+                    }
+                }
+            }
+            .encourage {
+                //
+                // width: 100%;
+                display: flex;
             }
         }
     }

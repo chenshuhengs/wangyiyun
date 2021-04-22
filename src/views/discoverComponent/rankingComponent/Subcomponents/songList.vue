@@ -118,6 +118,7 @@
                 }
                 td {
                     display: flex;
+                    align-items: center;
                     font-size: 16px;
                     padding: 5px 0;
                     white-space: nowrap;
@@ -128,6 +129,10 @@
                     &:nth-of-type(1) {
                         width: 40%;
                         box-sizing: border-box;
+                        p {
+                            margin: 0;
+                            padding: 0;
+                        }
                         .like {
                             color: rgb(226, 15, 15);
                         }

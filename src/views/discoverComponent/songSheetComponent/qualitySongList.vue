@@ -4,7 +4,7 @@
 <template>
     <section class="top-bar" @click="toJump">
         <div v-for="(item, index) in fineMusic.playlists" :key="index" class="img">
-            <img v-lazy="getImgUrl(item.coverImgUrl, 200)" />
+            <img v-lazy="getImgUrl(item.coverImgUrl, 180)" />
             <div class="icon">
                 <div class="top">
                     <Icon :size="12" name="huangguan"></Icon>
@@ -75,7 +75,6 @@
                     width: 90px;
                     display: flex;
                     font-weight: 700;
-                    padding: 3px 10px;
                     align-items: center;
                     border-radius: 50px;
                     justify-content: center;
@@ -86,6 +85,7 @@
                         margin-left: 5px;
                         font-weight: 500;
                         display: inline-block;
+                        white-space: nowrap;
                     }
                 }
                 .bottom {

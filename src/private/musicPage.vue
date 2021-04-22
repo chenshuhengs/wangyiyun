@@ -16,13 +16,6 @@
                         <span>最近更新：{{ today }}</span>
                     </div>
                     <div>
-                        <div class="one">
-                            <p>
-                                <span class="iconfont icon-bofang222"></span>
-                                <span>播放全部</span>
-                            </p>
-                            <i class="iconfont icon-jia"></i>
-                        </div>
                         <div class="identical">
                             <i class="iconfont icon-shoucang1" v-if="playlist.subscribed"></i>
                             <i class="iconfont icon-shoucang" v-else></i>
@@ -193,9 +186,11 @@
                             }
                         }
                         &:nth-of-type(3) {
-                            display: flex;
                             .one {
-                                color: #fff;
+                                // color: #fff;
+                                display: flex;
+                                align-items: center;
+
                                 p {
                                     height: 35px;
                                     padding-right: 5px;
@@ -213,13 +208,11 @@
                                         background-color: rgb(194, 7, 7);
                                     }
                                 }
-                                i {
+                                div {
+                                    height: 35px;
                                     border-top-right-radius: 30px;
                                     border-bottom-right-radius: 30px;
-                                    height: 35px;
                                     padding: 0 10px;
-                                    display: flex;
-                                    align-items: center;
                                     font-size: 21px;
                                     background-color: rgba(230, 18, 18, 0.8);
                                     &:hover {

@@ -13,7 +13,10 @@ import VueLazyload from 'vue-lazyload'
 // 注册公共组件
 import componentFn from '@/utils/componentFn'
 const EMPTY_IMG = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-
+import VEmojiPicker from 'v-emoji-picker'
+Vue.use(VEmojiPicker)
+import Vue2Emoji from 'vuejs-emoji'
+Vue.use(Vue2Emoji)
 Vue.use(ElementUI)
 Vue.use(componentFn)
 Vue.use(VueLazyload, {
