@@ -12,7 +12,7 @@
             <contentList :musicList="musicList"></contentList>
         </section>
         <!-- 分页 -->
-        <paging :total="total" @pageJump="pageJump"></paging>
+        <paging :total="total" :size="100" @pageJump="pageJump"></paging>
     </section>
 </template>
 

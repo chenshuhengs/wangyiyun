@@ -6,7 +6,7 @@
         <el-pagination
             @current-change="handleCurrentChange"
             :current-page.sync="currentPage1"
-            :page-size="100"
+            :page-size="size"
             layout="pager"
             :total="total"
         ></el-pagination>
@@ -18,6 +18,9 @@
     export default {
         name: 'paging',
         props: {
+            size: {
+                type: Number,
+            },
             total: {
                 type: Number,
                 default: 0,

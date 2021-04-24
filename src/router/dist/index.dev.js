@@ -215,10 +215,10 @@ var routes = [{
     }
   }, {
     path: '/discover/user/:key',
-    name: 'userInit',
+    name: 'user',
     component: function component() {
       return Promise.resolve().then(function () {
-        return _interopRequireWildcard(require('@/views/router-link/user/userInit'));
+        return _interopRequireWildcard(require('@/views/router-link/user/'));
       });
     },
     meta: {
@@ -232,6 +232,19 @@ var routes = [{
     component: function component() {
       return Promise.resolve().then(function () {
         return _interopRequireWildcard(require('@/views/router-link/mv/'));
+      });
+    },
+    meta: {
+      id: undefined,
+      show: undefined,
+      name: undefined
+    }
+  }, {
+    path: '/discover/follow/:id',
+    name: 'followList',
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require('@/views/router-link/followList/'));
       });
     },
     meta: {

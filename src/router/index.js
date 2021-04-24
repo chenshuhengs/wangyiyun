@@ -134,14 +134,20 @@ const routes = [
             },
             {
                 path: '/discover/user/:key',
-                name: 'userInit',
-                component: () => import('@/views/router-link/user/userInit'),
+                name: 'user',
+                component: () => import('@/views/router-link/user/'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
             {
                 path: '/discover/mv/:id',
                 name: 'mv',
                 component: () => import('@/views/router-link/mv/'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
+            {
+                path: '/discover/follow/:id',
+                name: 'followList',
+                component: () => import('@/views/router-link/followList/'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
         ],

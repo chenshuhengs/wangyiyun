@@ -9,6 +9,8 @@ exports.playCount = playCount;
 exports.timeDate = timeDate;
 exports.minute = minute;
 exports.likeMusic = likeMusic;
+exports.fabulous = fabulous;
+exports.queryCollection = queryCollection;
 exports.domBollFun = domBollFun;
 
 function rounding(money) {
@@ -52,6 +54,28 @@ function likeMusic(id, likeid) {
   for (var i = 0; i < likeid.length; i++) {
     if (likeid[i] == id) {
       likeid.splice(i, 1);
+      return true;
+    }
+  }
+
+  return false;
+} // 视频是否点赞
+
+
+function fabulous(id, mvList) {
+  for (var i = 0; i < mvList.length; i++) {
+    if (mvList[i].mlogBaseData.id == id) {
+      return true;
+    }
+  }
+
+  return false;
+} // 视频是否收藏
+
+
+function queryCollection(id, queryList) {
+  for (var i = 0; i < queryList.length; i++) {
+    if (queryList[i].vid == id) {
       return true;
     }
   }

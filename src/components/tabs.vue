@@ -29,6 +29,7 @@
         z-index: 900;
         position: fixed;
         background-color: var(--tab-bgcolor);
+        padding: 0 30px;
         ul {
             display: flex;
             align-items: center;
