@@ -63,10 +63,11 @@
                             var time1 = setTimeout(() => {
                                 this.show = false
                             }, 2000)
-                        } else if (res.data.code == 200 && t == 1) {
+                        } else if ((res.data.code == 201 || res.data.code == 200) && t == 1) {
+                            console.log(res)
                             this.message = res.data.followContent ? res.data.followContent : '关注成功'
                             this.message = res.data.followContent
-                            this.follow.push({ userId: res.data.user.userId })
+                            this.follow.push({ userId: this.userId })
                             this.show = true
                             this.state = 'duihaoduihaoduihao1231231-copy'
                             setTimeout(time2)

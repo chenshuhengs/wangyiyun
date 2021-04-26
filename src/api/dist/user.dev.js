@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getUserfolloweds = exports.getUserFollows = exports.getUserEvent = exports.getUserFollow = exports.getFollow = exports.getUserPlaylist = exports.getUserDetail = void 0;
+exports.getUserfolloweds = exports.getUserFollows = exports.getUserEvent = exports.getFollow = exports.getUserPlaylist = exports.getUserDetail = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -26,27 +26,20 @@ exports.getUserPlaylist = getUserPlaylist;
 
 var getFollow = function getFollow(params) {
   return _axios["default"].get("/follow?id=".concat(params.id, "&t=").concat(params.t));
-}; // 获取用户关注列表
+}; // 用户动态
 
 
 exports.getFollow = getFollow;
 
-var getUserFollow = function getUserFollow(params) {
-  return _axios["default"].get("/user/follows?uid=".concat(params.id));
-}; // 用户动态
-
-
-exports.getUserFollow = getUserFollow;
-
 var getUserEvent = function getUserEvent(params) {
-  return _axios["default"].get("/user/event?uid=".concat(params.id));
+  return _axios["default"].get("/user/event?uid=".concat(params.id, "&limit=").concat(params.limit));
 }; // 用户关注
 
 
 exports.getUserEvent = getUserEvent;
 
 var getUserFollows = function getUserFollows(params) {
-  return _axios["default"].get("/user/follows?uid=".concat(params.id));
+  return _axios["default"].get("/user/follows?uid=".concat(params.id, "&offset=").concat(params.offset));
 }; // 粉丝
 
 

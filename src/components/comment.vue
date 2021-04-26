@@ -349,7 +349,7 @@
                 li {
                     display: flex;
                     padding: 10px 0 10px 10px;
-                    height: 100px;
+                    // height: 100px;
                     border-bottom: 1px solid #e9e2e2;
                     .avatar {
                         width: 50px;

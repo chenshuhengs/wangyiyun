@@ -33,6 +33,7 @@
         ul {
             display: flex;
             align-items: center;
+            margin: 0;
             li {
                 display: flex;
                 align-items: center;

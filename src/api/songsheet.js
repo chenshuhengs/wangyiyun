@@ -11,3 +11,6 @@ export const getBoutiqueList = params => axios.get('/top/playlist', { params })
 export const getTagList = params => axios.get('/playlist/highquality/tags', { params })
 // 精品歌单
 export const getBoutiqueSong = params => axios.get('/top/playlist/highquality', { params })
+
+// 歌单收藏者
+export const getPlaylistSubscribers = params => axios.get('/playlist/subscribers', { params })

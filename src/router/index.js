@@ -150,6 +150,18 @@ const routes = [
                 component: () => import('@/views/router-link/followList/'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
+            {
+                path: '/discover/dynamic/:id',
+                name: 'dynamic',
+                component: () => import('@/views/router-link/followList/dynamic'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
+            {
+                path: '/discover/singerlist',
+                name: 'singerlist',
+                component: () => import('@/views/router-link/singerlist/'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
         ],
     },
 ]

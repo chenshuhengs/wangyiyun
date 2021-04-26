@@ -21,21 +21,21 @@
                     </div>
                     <div class="function">
                         <privateLetter></privateLetter>
-                        <follow :userId="userId" style="margin-left: 30px"></follow>
+                        <follow :userId="String(userId)" style="margin-left: 30px"></follow>
                     </div>
                 </div>
                 <div class="bottom">
                     <div class="details">
-                        <div>
-                            <p v-if="userDynamic">{{ userDynamic.size }}</p>
+                        <div @click="dynamicFn(userInit)">
+                            <p v-if="userInit">{{ userInit.profile.eventCount }}</p>
                             <p>动态</p>
                         </div>
-                        <div @click="userFollowFn">
-                            <p v-if="userFollow">{{ userFollow.follow.length }}</p>
+                        <div @click="userFollowFn('newFollows')">
+                            <p v-if="userInit">{{ userInit.profile.newFollows }}</p>
                             <p>关注</p>
                         </div>
-                        <div>
-                            <p v-if="userFans">{{ userFans.size }}</p>
+                        <div @click="userFollowFn('followeds')">
+                            <p v-if="userInit">{{ userInit.profile.followeds }}</p>
                             <p>粉丝</p>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-    import { getUserEvent, getUserFollows, getUserfolloweds, getUserDetail, getUserPlaylist } from '@/api/user'
+    import { getUserDetail, getUserPlaylist } from '@/api/user'
     export default {
         name: 'user',
         data() {
@@ -89,9 +89,6 @@
                 userId: '',
                 userInit: '',
                 avatarUrl: '',
-                userFans: 0, //用户粉丝
-                userFollow: 0, //用户关注
-                userDynamic: 0, //用户动态
                 songSheet: {
                     ordinary: [], //普通歌单
                     Collection: [], //收藏歌单
@@ -100,18 +97,6 @@
         },
         created() {
             this.userId = this.$route.params.key
-            //用户动态
-            getUserEvent({ id: this.userId }).then(res => {
-                this.userDynamic = res.data
-            })
-            // 用户关注
-            getUserFollows({ id: this.userId }).then(res => {
-                this.userFollow = res.data
-            })
-            // 粉丝
-            getUserfolloweds({ id: this.userId }).then(res => {
-                this.userFans = res.data
-            })
             getUserDetail({ id: this.userId }).then(res => {
                 this.avatarUrl = res.data.profile.avatarUrl
                 this.userInit = res.data
@@ -123,11 +108,16 @@
             })
         },
         methods: {
-            userFollowFn() {
+            dynamicFn(item) {
+                this.$router.push({
+                    path: `/discover/dynamic/${this.userId}`,
+                })
+            },
+            userFollowFn(item) {
                 this.$router.push({
                     path: `/discover/follow/${this.userId}`,
                     query: {
-                        name: this.userInit.profile.nickname,
+                        name: item == 'newFollows' ? item : 'followeds',
                     },
                 })
             },

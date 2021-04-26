@@ -252,6 +252,32 @@ var routes = [{
       show: undefined,
       name: undefined
     }
+  }, {
+    path: '/discover/dynamic/:id',
+    name: 'dynamic',
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require('@/views/router-link/followList/dynamic'));
+      });
+    },
+    meta: {
+      id: undefined,
+      show: undefined,
+      name: undefined
+    }
+  }, {
+    path: '/discover/singerlist',
+    name: 'singerlist',
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require('@/views/router-link/singerlist/'));
+      });
+    },
+    meta: {
+      id: undefined,
+      show: undefined,
+      name: undefined
+    }
   }]
 }];
 var router = new _vueRouter["default"]({

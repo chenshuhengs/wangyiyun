@@ -80,10 +80,8 @@
         },
         created() {
             this.mv = this.$route.params.id
-            console.log(this.mv)
             getSimiMv({ id: this.mv }).then(res => {
                 this.SimiMv = res.data.mvs
-                console.log(this.SimiMv)
             })
             getMvAddress(this.mv).then(res => {
                 this.mvUrl = res.data.data.url

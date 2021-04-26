@@ -12,7 +12,7 @@
                     </div>
                     <div>
                         <i class="icon iconfont icon-wangyiyunyinyuemusic1193417easyiconnet"></i>
-                        <router-link to="/">网易云音乐</router-link>
+                        <a href="javascript:;" @click="one">网易云音乐</a>
                         <span>最近更新：{{ today }}</span>
                     </div>
                     <div>
@@ -53,7 +53,7 @@
             <transition name="aaa">
                 <songList :list="playlist.tracks" v-if="name == 1"></songList>
                 <commentFn v-if="name == 2"></commentFn>
-                <Collection v-if="name == 3"></Collection>
+                <Collection v-if="name == 3" :id="this.id"></Collection>
             </transition>
         </div>
     </section>
@@ -104,7 +104,11 @@
         methods: {
             ...loginStore.mapActions(['getSubscribeFn']),
             ...loginStore.mapMutations(['LOGIN_STATE']),
-
+            one() {
+                this.$router.push({
+                    path: '/discover/user/1',
+                })
+            },
             Collection(count) {
                 return playCount(count)
             },
@@ -170,7 +174,7 @@
                             margin: 10px 0;
                             .icon {
                                 color: #fff;
-                                padding: 5px;
+                                padding: 5px 10px;
                                 border-radius: 50%;
                                 font-size: 20px;
                                 background: red;
@@ -278,8 +282,6 @@
                     }
                 }
             }
-        }
-        .content {
         }
     }
 </style>
