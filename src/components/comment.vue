@@ -20,38 +20,6 @@
             </div>
             <el-button round @click="commentSubmit">评论</el-button>
         </div>
-        <section class="content-list">
-            <h5>精彩评论</h5>
-            <ul>
-                <li v-for="(hot, index) in hotComments" :key="index">
-                    <div class="avatar">
-                        <img :src="hot.user.avatarUrl" alt="" />
-                    </div>
-                    <div class="comment-content">
-                        <div class="content">
-                            <span class="name" @click="userlink(hot)">{{ hot.user.nickname + ':' }}</span>
-                            <span class="content">{{ hot.content }}</span>
-                            <div v-if="hot.beReplied.length">
-                                <span class="nickname">@{{ hot.beReplied[0].user.nickname }}:</span>
-                                <span>{{ hot.beReplied[0].content }}</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <div>
-                                <span class="time">{{ timeFn(hot.time) }}</span>
-                            </div>
-                            <div class="top">
-                                <i class="iconfont icon-tubiaozhizuo123- red" v-if="hot.liked" @click="fabulousClick(0, hot)">
-                                    {{ hot.likedCount }}
-                                </i>
-                                <i class="iconfont icon-good" v-else @click="fabulousClick(1, hot)">{{ hot.likedCount ? hot.likedCount : '' }}</i>
-                                <i class="iconfont icon-xiaoxi" @click="reply(hot, 2)"></i>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </section>
         <section class="lately-comment">
             <h5>最近评论({{ commentCount }})</h5>
             <ul>
@@ -61,10 +29,10 @@
                     </div>
                     <div class="comment-content">
                         <div class="content">
-                            <span class="name" @click="userlink(hot)">{{ item.user.nickname + ':' }}</span>
+                            <span class="name" @click="userlink(item)">{{ item.user.nickname + ':' }}</span>
                             <span class="content">{{ item.content }}</span>
                             <div v-if="item.beReplied.length">
-                                <span class="nickname">@{{ item.beReplied[0].user.nickname }}:</span>
+                                <span class="nickname" @click="userlink(item)">@{{ item.beReplied[0].user.nickname }}:</span>
                                 <span>{{ item.beReplied[0].content }}</span>
                             </div>
                         </div>
@@ -129,7 +97,7 @@
         },
         created() {
             getCommentMv({ id: this.mvId }).then(res => {
-                res.data.code == 200 ? ((this.hotComments = res.data.hotComments), (this.comments = res.data.comments)) : ''
+                res.data.code == 200 ? (this.comments = res.data.comments) : ''
             })
         },
         watch: {
@@ -272,6 +240,7 @@
                                         message: '发表评论 成功',
                                         type: 'success',
                                     })
+                                    this.inputvalue = ''
                                 }
                                 this.$emit('commentOk')
                             })

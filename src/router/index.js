@@ -159,7 +159,13 @@ const routes = [
             {
                 path: '/discover/singerlist',
                 name: 'singerlist',
-                component: () => import('@/views/router-link/singerlist/'),
+                component: () => import('@/views/router-link/singerlist/index.vue'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
+            {
+                path: '/discover/singerdetails/:id',
+                name: 'singerDetails',
+                component: () => import('@/views/router-link/singerlist/singerDetails'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
         ],

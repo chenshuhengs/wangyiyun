@@ -270,7 +270,20 @@ var routes = [{
     name: 'singerlist',
     component: function component() {
       return Promise.resolve().then(function () {
-        return _interopRequireWildcard(require('@/views/router-link/singerlist/'));
+        return _interopRequireWildcard(require('@/views/router-link/singerlist/index.vue'));
+      });
+    },
+    meta: {
+      id: undefined,
+      show: undefined,
+      name: undefined
+    }
+  }, {
+    path: '/discover/singerdetails/:id',
+    name: 'singerDetails',
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require('@/views/router-link/singerlist/singerDetails'));
       });
     },
     meta: {

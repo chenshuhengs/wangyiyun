@@ -1,29 +1,43 @@
 <template>
     <section class="screen">
-        <!-- 语种 -->
-        <div class="languages">
-            <div>{{ screenSinger[0].type }}:</div>
+        <header>
+            <!-- 语种 -->
+            <div class="languages">
+                <div>{{ screenSinger[0].type }}:</div>
+                <ul>
+                    <li v-for="(item, index) in screenSinger[0].list" :key="index" @click="screenSingerFn('语种', item.name, item.type)">
+                        <span :class="item.name == languagesName ? 'active' : ''">{{ item.name }}</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- 分类 -->
+            <div class="classification">
+                <div>{{ screenSinger[1].type }}:</div>
+                <ul>
+                    <li v-for="(item, index) in screenSinger[1].list" :key="index" @click="screenSingerFn('分类', item.name, item.type)">
+                        <span :class="item.name == classificationName ? 'active' : ''">{{ item.name }}</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- 筛选 -->
+            <div class="screen">
+                <div>{{ screenSinger[2].type }}:</div>
+                <ul>
+                    <li v-for="(item, index) in screenSinger[2].list" :key="index" @click="screenSingerFn('筛选', item.name, item.type)">
+                        <span :class="item.name == screenName ? 'active' : ''">{{ item.name }}</span>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="infinite-list-wrapper content" style="overflow: auto">
             <ul>
-                <li v-for="(item, index) in screenSinger[0].list" :key="index" @click="screenSingerFn('语种', item.name, item.type)">
-                    <span :class="item.name == languagesName ? 'active' : ''">{{ item.name }}</span>
+                <li>
+                    <img :src="imgUrl" alt="" @click="singerPage(0)" />
+                    <p @click="singerPage(0)">歌手排行榜</p>
                 </li>
-            </ul>
-        </div>
-        <!-- 分类 -->
-        <div class="classification">
-            <div>{{ screenSinger[1].type }}:</div>
-            <ul>
-                <li v-for="(item, index) in screenSinger[1].list" :key="index" @click="screenSingerFn('分类', item.name, item.type)">
-                    <span :class="item.name == classificationName ? 'active' : ''">{{ item.name }}</span>
-                </li>
-            </ul>
-        </div>
-        <!-- 筛选 -->
-        <div class="screen">
-            <div>{{ screenSinger[2].type }}:</div>
-            <ul>
-                <li v-for="(item, index) in screenSinger[2].list" :key="index" @click="screenSingerFn('筛选', item.name, item.type)">
-                    <span :class="item.name == screenName ? 'active' : ''">{{ item.name }}</span>
+                <li v-for="(item, index) in artistsList" :key="index">
+                    <img :src="item.img1v1Url" alt="" @click="singerPage(item)" />
+                    <p @click="singerPage(item)">{{ item.name }}</p>
                 </li>
             </ul>
         </div>
@@ -38,6 +52,9 @@
         name: 'Screen',
         data() {
             return {
+                limit: 29,
+                imgUrl: '',
+                loading: false,
                 artistsList: [],
                 screenSinger: [
                     {
@@ -97,12 +114,12 @@
             }
         },
         created() {
-            let img = require('@/assets/image/geshou.jpg')
+            this.imgUrl = require('@/assets/image/geshou.jpg')
             let screenType = this.$store.state.singerStore.screenType //筛选
             let languagesType = this.$store.state.singerStore.languagesType //语种
             let classificationType = this.$store.state.singerStore.classificationType //分类
-            getArtistList({ type: classificationType, area: languagesType, initial: screenType }).then(res => {
-                if (res.data.code) {
+            getArtistList({ limit: this.limit, type: classificationType, area: languagesType, initial: screenType }).then(res => {
+                if (res.data.code == 200) {
                     this.artistsList = res.data.artists
                 }
             })
@@ -130,10 +147,25 @@
                     this.SCREEN_NAME(name)
                     this.SCREEN_TYPE(type)
                 }
+                getArtistList({ limit: this.limit, type: this.classificationType, area: this.languagesType, initial: this.screenType }).then(res => {
+                    if (res.data.code == 200) {
+                        this.artistsList = res.data.artists
+                    }
+                })
+            },
+            // 跳转到歌手页
+            singerPage(item) {
+                item
+                    ? this.$router.push({
+                          path: `/discover/singerdetails/${item.id}`,
+                      })
+                    : this.$router.push({
+                          path: `/discover/singerlist`,
+                      })
             },
         },
         computed: {
-            ...singerStore.mapState(['screenName', 'languagesName', 'classificationName']),
+            ...singerStore.mapState(['screenName', 'screenType', 'languagesName', 'languagesType', 'classificationName', 'classificationType']),
         },
     }
 </script>
@@ -165,6 +197,31 @@
                     .active {
                         color: red;
                         background-color: rgba(240, 157, 171, 0.3);
+                    }
+                }
+            }
+        }
+        .content {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                li {
+                    width: calc(~'95% / 5');
+                    img {
+                        width: 100%;
+                        border-radius: 5px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                    p {
+                        line-height: 30px;
+                        color: #636060;
+                        &:hover {
+                            color: #000;
+                            cursor: pointer;
+                        }
                     }
                 }
             }
