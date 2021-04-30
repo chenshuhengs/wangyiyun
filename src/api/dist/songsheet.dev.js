@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPlaylistSubscribers = exports.getBoutiqueSong = exports.getTagList = exports.getBoutiqueList = exports.getWholeSong = exports.getSongListTypes = void 0;
+exports.getSongDetail = exports.getPlaylistSubscribers = exports.getBoutiqueSong = exports.getTagList = exports.getBoutiqueList = exports.getWholeSong = exports.getSongListTypes = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -56,6 +56,15 @@ var getPlaylistSubscribers = function getPlaylistSubscribers(params) {
   return _axios["default"].get('/playlist/subscribers', {
     params: params
   });
-};
+}; // 获取歌曲详情
+
 
 exports.getPlaylistSubscribers = getPlaylistSubscribers;
+
+var getSongDetail = function getSongDetail(params) {
+  return _axios["default"].get('/song/detail', {
+    params: params
+  });
+};
+
+exports.getSongDetail = getSongDetail;

@@ -14,3 +14,6 @@ export const getBoutiqueSong = params => axios.get('/top/playlist/highquality', 
 
 // 歌单收藏者
 export const getPlaylistSubscribers = params => axios.get('/playlist/subscribers', { params })
+
+// 获取歌曲详情
+export const getSongDetail = params => axios.get('/song/detail', { params })

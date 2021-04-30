@@ -11,7 +11,7 @@
                 <th>专辑</th>
                 <th>时长</th>
             </tr>
-            <tr v-for="(item, index) in list" :key="index">
+            <tr v-for="(item, index) in list" :key="index" @click="musicPlay(item)">
                 <td>
                     <p class="identical">{{ index > 8 ? index + 1 : '0' + (index + 1) }}</p>
                     <p class="identical">
@@ -43,10 +43,13 @@
 
 <script>
     import heart from './heart'
-    import { minute, likeMusic } from '@/utils/'
     import Bus from '@/utils/bus.js'
+    import { minute, likeMusic } from '@/utils/'
+    import { getSongDetail } from '@/api/songsheet'
+    import { getSongUrl, getCheckMusic } from '@/api/music'
     import { createNamespacedHelpers } from 'vuex'
     const loginStore = createNamespacedHelpers('loginStore')
+    const playMusicStore = createNamespacedHelpers('playMusicStore')
     export default {
         name: 'songList',
         props: {
@@ -68,15 +71,20 @@
             })
         },
         methods: {
+            ...playMusicStore.mapMutations(['MUSCIC_LIST']),
             mvPage(item) {
                 this.$router.push(`/discover/mv/${item.mv}`)
             },
             minuteFn(time) {
                 return minute(time)
             },
+            musicPlay(item) {
+                Bus.$emit('play', item.id)
+            },
         },
         computed: {
             ...loginStore.mapState(['id']),
+            ...playMusicStore.mapState(['musicList']),
         },
     }
 </script>

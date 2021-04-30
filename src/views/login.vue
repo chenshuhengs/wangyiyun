@@ -1,19 +1,19 @@
 <template>
-    <section class="login">
-        <div class="content">
-            <h3>登录</h3>
-            <el-form :label-position="labelPosition" label-width="100px" :model="form">
-                <el-form-item label="用户名:">
-                    <el-input v-model="form.username"></el-input>
-                </el-form-item>
-                <el-form-item label="密码:">
-                    <el-input v-model="form.password" type="password"></el-input>
-                </el-form-item>
-            </el-form>
-            <el-button :plain="show" type="primary" @click="loginStart">登录</el-button>
-        </div>
-        <div class="close" @mouseover="rotate" @click="close" :class="[count == 1 ? 'yes' : 'no']">
-            <Icon :size="12" name="guanbi"></Icon>
+    <section class="am-login">
+        <div id="bigBox">
+            <h1>LOGIN</h1>
+            <div class="inputBox">
+                <div class="inputText">
+                    <span class="iconfont icon-nickname"></span>
+                    <input type="text" v-model="form.username" placeholder="Username" />
+                </div>
+                <div class="inputText">
+                    <span class="iconfont icon-visible_outlined"></span>
+                    <input type="password" v-model="form.password" placeholder="Password" />
+                </div>
+            </div>
+            <input class="loginButton" type="button" value="Login" @click="loginStart" />
+            <i class="iconfont icon-guanbi guanbi" @click="close"></i>
         </div>
     </section>
 </template>
@@ -28,7 +28,6 @@
         name: 'Login',
         data() {
             return {
-                count: 0,
                 show: false,
                 form: {
                     username: '',
@@ -39,9 +38,6 @@
         },
         methods: {
             ...loginStore.mapMutations(['USER_ID', 'USER_NAME', 'USER_AVATAR', 'LOGIN_STATE']),
-            rotate() {
-                this.count++
-            },
             close() {
                 this.LOGIN_STATE(false)
             },
@@ -81,40 +77,63 @@
 </script>
 
 <style lang="less" scoped>
-    .login {
-        padding: 20px 30px;
+    .am-login {
         z-index: 999;
         position: absolute;
         left: 40%;
         top: 30%;
-        background: #fff;
-        width: 250px;
-        height: 330px;
         border-radius: 10px;
-        .content {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            .el-button {
-                margin-top: 40px;
-            }
+        #bigBox {
+            position: relative;
+            padding: 20px 50px; /* login框内部的距离(内部与输入框和按钮的距离) */
+            background-color: rgba(48, 46, 46, 0.7); /* login框背景颜色和透明度 */
+            width: 400px;
+            height: 360px;
+            border-radius: 10px; /* 圆角边 */
+            text-align: center; /* 框内所有内容剧中 */
         }
-        .close {
+
+        #bigBox h1 {
+            color: white; /* LOGIN字体颜色 */
+        }
+
+        #bigBox .inputBox {
+            margin-top: 50px; /* 输入框顶部与LOGIN标题的间距 */
+        }
+
+        #bigBox .inputBox .inputText {
+            margin-top: 20px; /* 输入框之间的距离 */
+        }
+
+        #bigBox .inputBox .inputText span {
+            color: white; /* icon颜色 */
+        }
+
+        #bigBox .inputBox .inputText input {
+            border: 0; /* 删除输入框边框 */
+            padding: 10px 10px; /* 输入框内的间距 */
+            border-bottom: 1px solid white; /* 输入框白色下划线 */
+            background-color: #00000000; /* 输入框透明 */
+            color: white; /* 输入字体的颜色 */
+        }
+
+        #bigBox .loginButton {
+            margin-top: 30px; /* 按钮顶部与输入框的距离 */
+            width: 150px;
+            height: 40px;
+            color: white; /* 按钮字体颜色 */
+            border: 0; /* 删除按钮边框 */
+            border-radius: 20px; /* 按钮圆角边 */
+            background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #b18798 100%); /* 按钮颜色 */
+        }
+        .guanbi {
             position: absolute;
             right: 10px;
             top: 10px;
-        }
-        .yes {
+            font-size: 20px;
+            color: #fff;
             &:hover {
-                animation: 0.3s fadeIn forwards;
-            }
-            @keyframes fadeIn {
-                0% {
-                    transform: rotate(0deg);
-                }
-                100% {
-                    transform: rotate(180deg);
-                }
+                cursor: pointer;
             }
         }
     }

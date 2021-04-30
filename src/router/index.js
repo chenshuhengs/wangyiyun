@@ -89,17 +89,6 @@ const routes = [
                             label: '歌手',
                         },
                     },
-                    {
-                        path: '/discover/music',
-                        name: 'musicComponent',
-                        component: () => import('@/views/discoverComponent/musicComponent'),
-                        meta: {
-                            id: 1,
-                            show: false,
-                            name: 'music',
-                            label: '最新音乐',
-                        },
-                    },
                 ],
             },
             {
@@ -139,12 +128,6 @@ const routes = [
                 meta: { id: undefined, show: undefined, name: undefined },
             },
             {
-                path: '/discover/mv/:id',
-                name: 'mv',
-                component: () => import('@/views/router-link/mv/'),
-                meta: { id: undefined, show: undefined, name: undefined },
-            },
-            {
                 path: '/discover/follow/:id',
                 name: 'followList',
                 component: () => import('@/views/router-link/followList/'),
@@ -168,7 +151,19 @@ const routes = [
                 component: () => import('@/views/router-link/singerlist/singerDetails'),
                 meta: { id: undefined, show: undefined, name: undefined },
             },
+            {
+                path: '/discover/exclusivebroadcast',
+                name: 'exclusiveBroadcast',
+                component: () => import('@/views/discoverComponent/personalityComponent/exclusiveBroadcast'),
+                meta: { id: undefined, show: undefined, name: undefined },
+            },
         ],
+    },
+    {
+        path: '/discover/mv/:id',
+        name: 'mv',
+        component: () => import('@/views/router-link/mv/'),
+        meta: { id: undefined, show: undefined, name: undefined },
     },
 ]
 

@@ -133,20 +133,6 @@ var routes = [{
         name: 'singer',
         label: '歌手'
       }
-    }, {
-      path: '/discover/music',
-      name: 'musicComponent',
-      component: function component() {
-        return Promise.resolve().then(function () {
-          return _interopRequireWildcard(require('@/views/discoverComponent/musicComponent'));
-        });
-      },
-      meta: {
-        id: 1,
-        show: false,
-        name: 'music',
-        label: '最新音乐'
-      }
     }]
   }, {
     path: '/video',
@@ -227,19 +213,6 @@ var routes = [{
       name: undefined
     }
   }, {
-    path: '/discover/mv/:id',
-    name: 'mv',
-    component: function component() {
-      return Promise.resolve().then(function () {
-        return _interopRequireWildcard(require('@/views/router-link/mv/'));
-      });
-    },
-    meta: {
-      id: undefined,
-      show: undefined,
-      name: undefined
-    }
-  }, {
     path: '/discover/follow/:id',
     name: 'followList',
     component: function component() {
@@ -291,7 +264,33 @@ var routes = [{
       show: undefined,
       name: undefined
     }
+  }, {
+    path: '/discover/exclusivebroadcast',
+    name: 'exclusiveBroadcast',
+    component: function component() {
+      return Promise.resolve().then(function () {
+        return _interopRequireWildcard(require('@/views/discoverComponent/personalityComponent/exclusiveBroadcast'));
+      });
+    },
+    meta: {
+      id: undefined,
+      show: undefined,
+      name: undefined
+    }
   }]
+}, {
+  path: '/discover/mv/:id',
+  name: 'mv',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('@/views/router-link/mv/'));
+    });
+  },
+  meta: {
+    id: undefined,
+    show: undefined,
+    name: undefined
+  }
 }];
 var router = new _vueRouter["default"]({
   routes: routes

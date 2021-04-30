@@ -18,7 +18,7 @@
         </header>
         <ul v-infinite-scroll="getBoutiqueList" infinite-scroll-immediate="true" infinite-scroll-distance="200" infinite-scroll-delay="300">
             <li v-for="(playlist, index) in playlists" :key="index" class="infinite-list-item">
-                <div class="left">
+                <div class="left" @click="recommendMusicFn(playlist)">
                     <img :src="playlist.coverImgUrl" alt="" />
                     <div class="horn"></div>
                     <em class="iconfont icon-huangguan"></em>
@@ -32,7 +32,7 @@
                     <p class="name">
                         <span>{{ playlist.name }}</span>
                     </p>
-                    <p class="nickname">
+                    <p class="nickname" @click="userLink(playlist)">
                         <span>by</span>
                         {{ playlist.creator.nickname }}
                     </p>
@@ -71,6 +71,11 @@
             prpup() {
                 this.direction = !this.direction
             },
+            userLink(item) {
+                this.$router.push({
+                    path: `/discover/user/${item.userId}`,
+                })
+            },
             playlistFn(playlist, name) {
                 this.tagnameId = name
                 this.direction = false
@@ -91,6 +96,11 @@
                     cat: this.tagnameId,
                 }).then(res => {
                     this.playlists = res.data.playlists
+                })
+            },
+            recommendMusicFn(item) {
+                this.$router.push({
+                    path: `/discover/ranking/${item.id}`,
                 })
             },
         },
@@ -183,6 +193,7 @@
                         }
                     }
                     &:hover {
+                        cursor: pointer;
                         i {
                             .opacity();
                         }
@@ -191,7 +202,7 @@
                     i {
                         .position2(8px,10px);
                         opacity: 0;
-                        padding: 8px;
+                        padding: 5px 8px;
                         font-size: 20px;
                         background: #fff;
                         border-radius: 50%;

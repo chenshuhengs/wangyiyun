@@ -17,6 +17,8 @@ var _discoverStore = _interopRequireDefault(require("./modules/discoverStore"));
 
 var _anchorDjStore = _interopRequireDefault(require("./modules/anchorDjStore"));
 
+var _playMusicStore = _interopRequireDefault(require("./modules/playMusicStore"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
@@ -26,7 +28,8 @@ var _default = new _vuex["default"].Store({
     loginStore: _loginStore["default"],
     discoverStore: _discoverStore["default"],
     anchorDjStore: _anchorDjStore["default"],
-    singerStore: _singerStore["default"]
+    singerStore: _singerStore["default"],
+    playMusicStore: _playMusicStore["default"]
   },
   // 生产环境下 开启严格模式
   strict: process.env.NODE_ENV !== 'production'

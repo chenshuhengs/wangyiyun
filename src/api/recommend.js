@@ -5,7 +5,9 @@ import axios from 'axios'
 // 推荐MV
 export const getMv = () => axios.get('/personalized/mv')
 // 独家放送
-export const getSole = () => axios.get(`/personalized/privatecontent`)
+export const getSole = params => axios.get(`/personalized/privatecontent`)
+// 独家放送列表
+export const getSoleList = params => axios.get(`/personalized/privatecontent/list`, { params })
 // 推荐歌单
 export const getRecommendMusic = () => axios.get(`/personalized?limit=10`)
 // 最新音乐

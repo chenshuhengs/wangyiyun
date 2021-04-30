@@ -35,7 +35,7 @@
                         <span>歌曲:{{ playlist.trackCount }}</span>
                         <span>播放:{{ Collection(playlist.playCount) }}</span>
                     </div>
-                    <div>
+                    <div class="description">
                         <span>简介:{{ playlist.description }}</span>
                     </div>
                 </div>
@@ -132,6 +132,7 @@
 </script>
 
 <style lang="less" scoped>
+    @import '../assets/style/mixins.less';
     .musci-list {
         width: 100%;
         height: 100%;
@@ -260,6 +261,9 @@
                                 font-size: 18px;
                             }
                         }
+                    }
+                    .description {
+                        .twoline();
                     }
                 }
             }

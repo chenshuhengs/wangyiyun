@@ -9,7 +9,7 @@
             <div class="recommend">
                 <router-link to="/discover/songsheet">推荐歌单 🌟</router-link>
                 <ul>
-                    <li v-for="(music, index) in recommendMusic" :key="index">
+                    <li v-for="(music, index) in recommendMusic" :key="index" @click="recommendMusicFn(music)">
                         <div>
                             <img :src="music.picUrl" alt="" />
                             <i class="iconfont icon-play"></i>
@@ -22,9 +22,9 @@
             <!-- 独家放送 MV -->
             <mvComponent>
                 <template #content>
-                    <router-link to="/discover/songsheet">{{ sole.name }} 🌟</router-link>
+                    <router-link to="/discover/exclusivebroadcast">{{ sole.name }} 🌟</router-link>
                     <ul class="sole">
-                        <li v-for="(item, index) in sole.result" :key="index">
+                        <li v-for="(item, index) in sole.result" :key="index" @click="mvRouteLink(item)">
                             <div>
                                 <img :src="item.picUrl" alt="" />
                                 <i class="iconfont icon-play"></i>
@@ -39,7 +39,7 @@
                 <template #content>
                     <router-link to="/discover/songsheet">最新音乐🌟</router-link>
                     <ul class="newest-music">
-                        <li class="music" v-for="(music, index) in newestMusic" :key="index">
+                        <li class="music" v-for="(music, index) in newestMusic" :key="index" @click="playMusic(music)">
                             <div class="left">
                                 <img :src="music.picUrl" alt="" />
                                 <i class="iconfont icon-play"></i>
@@ -65,7 +65,13 @@
                 <template #content>
                     <router-link to="/discover/songsheet">推荐MV🌟</router-link>
                     <ul class="mv">
-                        <li v-for="(item, index) in MV" :key="index" ref="li" :class="[screenWidth > 1250 ? 'fourimgblock' : 'fourimg']">
+                        <li
+                            v-for="(item, index) in MV"
+                            :key="index"
+                            ref="li"
+                            :class="[screenWidth > 1250 ? 'fourimgblock' : 'fourimg']"
+                            @click="mvRouteLink(item)"
+                        >
                             <img :src="item.picUrl" alt="" />
                             <p class="copywriter">{{ item.copywriter }}</p>
                             <p class="name">{{ item.name }}</p>
@@ -81,6 +87,7 @@
 </template>
 
 <script>
+    import Bus from '@/utils/bus.js'
     import Tips from '@/components/Tips'
     import { playCount } from '@/utils/'
     import { throttle } from 'lodash-es'
@@ -127,8 +134,21 @@
             calc() {
                 this.screenWidth = document.body.clientWidth
             },
+            playMusic(item) {
+                Bus.$emit('play', item.id)
+            },
             playCountFun(count) {
                 return playCount(count)
+            },
+            mvRouteLink(item) {
+                this.$router.push({
+                    path: `/discover/mv/${item.id}`,
+                })
+            },
+            recommendMusicFn(item) {
+                this.$router.push({
+                    path: `/discover/ranking/${item.id}`,
+                })
             },
         },
         mounted() {
@@ -146,6 +166,8 @@
                 display: block;
                 padding: 20px 0 10px 0;
                 color: var(--font-color);
+                font-size: 20px;
+                font-weight: 600;
                 &:hover {
                     .cursor();
                 }
@@ -175,7 +197,7 @@
                             i {
                                 .position2(7px,11px);
                                 display: inline-block;
-                                padding: 6px;
+                                padding: 6px 10px;
                                 background: #fff;
                                 border-radius: 50%;
                                 color: rgb(226, 10, 10);
@@ -183,6 +205,7 @@
                                 opacity: 0;
                             }
                             &:hover {
+                                cursor: pointer;
                                 i {
                                     .opacity();
                                 }
@@ -200,6 +223,9 @@
                 .flex();
                 li {
                     width: calc(~'95% / 3');
+                    &:hover {
+                        cursor: pointer;
+                    }
                     div {
                         display: flex;
                         position: relative;
@@ -301,6 +327,7 @@
                         transition: transform 1s;
                     }
                     &:hover {
+                        cursor: pointer;
                         .copywriter {
                             transform: translateY(17px);
                             /* 0.4s完成transform移动效果*/

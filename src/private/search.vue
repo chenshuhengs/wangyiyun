@@ -46,7 +46,7 @@
         }
         .icon {
             position: absolute;
-            top: 4px;
+            top: 1px;
             left: 10px;
         }
     }

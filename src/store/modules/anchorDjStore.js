@@ -1,5 +1,3 @@
-// 发现音乐
-
 const state = {}
 const getters = {}
 const mutations = {}

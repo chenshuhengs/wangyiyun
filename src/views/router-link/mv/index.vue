@@ -131,6 +131,19 @@
         justify-content: space-around;
         padding: 0 30px;
         width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: #636060;
+        }
         .left {
             width: 55%;
             h5 {

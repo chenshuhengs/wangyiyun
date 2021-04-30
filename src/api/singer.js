@@ -30,3 +30,6 @@ export const getAlbumDetail = params => axios.get('/artist/detail', { params })
 
 // 获取相似歌手
 export const getSimtAlbum = params => axios.get('/simi/artist', { params })
+
+// 新歌速递
+export const getTopSong = params => axios.get('/top/song', { params })

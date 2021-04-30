@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSimtAlbum = exports.getAlbumDetail = exports.getAlbumMv = exports.getAlbumTopSong = exports.getAlbum = exports.getArtistSlbum = exports.getArtistDetail = exports.getTopArtists = exports.getToplistArtist = exports.getArtistList = void 0;
+exports.getTopSong = exports.getSimtAlbum = exports.getAlbumDetail = exports.getAlbumMv = exports.getAlbumTopSong = exports.getAlbum = exports.getArtistSlbum = exports.getArtistDetail = exports.getTopArtists = exports.getToplistArtist = exports.getArtistList = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -96,6 +96,15 @@ var getSimtAlbum = function getSimtAlbum(params) {
   return _axios["default"].get('/simi/artist', {
     params: params
   });
-};
+}; // 新歌速递
+
 
 exports.getSimtAlbum = getSimtAlbum;
+
+var getTopSong = function getTopSong(params) {
+  return _axios["default"].get('/top/song', {
+    params: params
+  });
+};
+
+exports.getTopSong = getTopSong;

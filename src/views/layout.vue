@@ -1,11 +1,15 @@
 <template>
     <section class="app">
         <headerBar class="header"></headerBar>
+        <playPageCom></playPageCom>
         <section class="content">
             <sideBar></sideBar>
             <main class="main" ref="main">
                 <router-view></router-view>
             </main>
+        </section>
+        <section class="buttom">
+            <playMusic></playMusic>
         </section>
         <transition name="fade">
             <Login v-if="loginState"></Login>
@@ -16,6 +20,8 @@
 <script>
     import Login from './login'
     import Bus from '@/utils/bus.js'
+    import playMusic from './playMusic'
+    import playPageCom from './playPageCom'
     import backTop from '@/utils/backTop.js'
     import { createNamespacedHelpers } from 'vuex'
     const loginStore = createNamespacedHelpers('loginStore')
@@ -23,6 +29,8 @@
         name: 'layout',
         components: {
             Login,
+            playMusic,
+            playPageCom,
         },
         created() {
             Bus.$on('callBack', () => {
@@ -50,10 +58,10 @@
             width: 100%;
             overflow: hidden;
             height: calc(~'100% - 120px');
+            position: relative;
             .main {
                 width: 100%;
                 height: 100%;
-                // padding: 0 50px;
                 overflow: hidden;
                 overflow-y: scroll;
                 background-color: var(--body-bgcolor);
@@ -68,6 +76,13 @@
                     background: #636060;
                 }
             }
+        }
+        .buttom {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
         }
     }
 </style>

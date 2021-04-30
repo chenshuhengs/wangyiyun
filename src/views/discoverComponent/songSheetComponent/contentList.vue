@@ -4,7 +4,7 @@
 <template>
     <section class="contentlist">
         <ul>
-            <li v-for="(item, index) in musicList" :key="index">
+            <li v-for="(item, index) in musicList" :key="index" @click="recommendMusicFn(item)">
                 <div class="author">
                     <img :src="item.coverImgUrl" alt="" />
                     <div class="top">
@@ -12,7 +12,7 @@
                         <span class="count">{{ playCountFun(item.playCount) }}</span>
                     </div>
                     <div class="bottom">
-                        <i class="iconfont icon-wode"></i>
+                        <i class="iconfont icon-wode-"></i>
                         <span class="name">{{ item.creator.nickname }}</span>
                     </div>
                     <div class="play">
@@ -41,6 +41,11 @@
             playCountFun(count) {
                 return playCount(count)
             },
+            recommendMusicFn(item) {
+                this.$router.push({
+                    path: `/discover/ranking/${item.id}`,
+                })
+            },
         },
     }
     // 11:anchor  0
@@ -55,6 +60,9 @@
             li {
                 width: calc(~'88% / 4');
                 margin-bottom: 15px;
+                &:hover {
+                    cursor: pointer;
+                }
                 .author {
                     display: flex;
                     position: relative;
