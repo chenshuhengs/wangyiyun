@@ -29,6 +29,7 @@
     import userPopup from '@/private/userPopup/userPopup'
     import { createNamespacedHelpers } from 'vuex'
     const loginStore = createNamespacedHelpers('loginStore')
+    const playMusicStore = createNamespacedHelpers('playMusicStore')
     import { requestFullScreen, exitFullscreen, isFullscreen } from '@/utils/pageScaling.js'
     export default {
         name: 'headerBar',
@@ -57,6 +58,7 @@
             })
         },
         methods: {
+            ...playMusicStore.mapMutations(['MUSIC_PAGE_STATE']),
             ...loginStore.mapMutations(['POPUP', 'USER_NAME', 'USER_AVATAR', 'LOGIN_STATE']),
             login() {
                 this.LOGIN_STATE(true)
@@ -74,6 +76,7 @@
             // 回到主页
             homepage() {
                 this.$router.push('/')
+                this.MUSIC_PAGE_STATE(false)
             },
             showpopup() {
                 this.Popupstate = !this.Popupstate

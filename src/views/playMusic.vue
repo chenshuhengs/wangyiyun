@@ -15,13 +15,13 @@
                         <p>{{ musicInit.ar[0].name }}</p>
                     </div>
                     <div>
-                        <p v-if="currentMusicTime">{{ currentMusicTime }}</p>
-                        <p v-if="musicMaxTime">{{ musicMaxTime }}</p>
+                        <p>{{ musicPlayingTime }}</p>
+                        <p>{{ totalDurationOfMusic }}</p>
                     </div>
                 </div>
             </div>
             <div class="center">
-                <VueAudio :http="http" @maxTime="maxTime" @currentTime="currentTime"></VueAudio>
+                <VueAudio :http="http"></VueAudio>
             </div>
             <div class="right"></div>
         </div>
@@ -73,20 +73,12 @@
         },
         methods: {
             ...playMusicStore.mapMutations(['MUSCI_PLAY_ID', 'MUSIC_PAGE_STATE']),
-            // 歌曲总时长
-            maxTime(time) {
-                this.musicMaxTime = time
-            },
-            // 歌曲当前播放时长
-            currentTime(time) {
-                this.currentMusicTime = time
-            },
             playInterface() {
                 this.MUSIC_PAGE_STATE(true)
             },
         },
         computed: {
-            ...playMusicStore.mapState(['musicList']),
+            ...playMusicStore.mapState(['musicList', 'musicPlayingTime', 'totalDurationOfMusic']),
         },
     }
 </script>

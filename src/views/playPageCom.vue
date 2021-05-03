@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="right">
-                        <lyricCom :lyric="lyric"></lyricCom>
+                        <lyricCom :lyric="lyric" :lyricInit="lyricInit"></lyricCom>
                     </div>
                 </div>
                 <div class="bottom"></div>
@@ -35,7 +35,8 @@
         data() {
             return {
                 show: true,
-                lyric: {},
+                lyric: {}, //歌词
+                lyricInit: [], //歌曲详情
                 imgUrl: '',
                 musicName: '',
             }
@@ -56,6 +57,7 @@
                 })
                 getSongDetail({ ids: newData }).then(res => {
                     this.imgUrl = res.data.songs[0].al.picUrl
+                    this.lyricInit = res.data.songs
                 })
             },
         },
@@ -104,6 +106,7 @@
             .top {
                 height: 100%;
                 display: flex;
+                // align-items: center;
                 .left {
                     width: 50%;
                     .play-bar-support {
@@ -170,7 +173,9 @@
                 }
                 .right {
                     width: 50%;
-                    background: red;
+                    height: 60%;
+                    margin-top: 60px;
+                    text-align: center;
                 }
             }
         }

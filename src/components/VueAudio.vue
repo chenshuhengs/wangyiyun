@@ -41,7 +41,7 @@
             }
         },
         methods: {
-            ...playMusicStore.mapMutations(['MUSIC_PLAY_STATE']),
+            ...playMusicStore.mapMutations(['MUSIC_PLAY_STATE', 'MUSIC_PLAYING_TIME', 'TOTAL_DURATION_OF_MUSIC']),
             // 播放当前播放的音乐
             play() {
                 this.audio.playing = true
@@ -77,11 +77,11 @@
                 this.audio.currentTime = parseInt(event.target.currentTime)
 
                 this.sliderTime = parseInt((this.audio.currentTime / this.audio.maxTime) * 100)
-                this.audio.currentTime ? this.$emit('currentTime', realFormatSecond(parseInt(event.target.currentTime))) : ''
+                this.audio.currentTime ? this.MUSIC_PLAYING_TIME(realFormatSecond(parseInt(event.target.currentTime))) : ''
             },
             onLoadedmetadata(event) {
                 this.audio.maxTime = parseInt(event.target.duration)
-                this.audio.maxTime ? this.$emit('maxTime', realFormatSecond(parseInt(event.target.duration))) : ''
+                this.audio.maxTime ? this.TOTAL_DURATION_OF_MUSIC(realFormatSecond(parseInt(event.target.duration))) : ''
             },
             formatProcessToolTip(index = 0) {
                 index = parseInt((this.audio.maxTime / 100) * index)
