@@ -1,6 +1,9 @@
 // 发现音乐
 
 const state = {
+    volume: 50, //音量
+    lyriclist: [], //歌词内容和歌词时间
+    lyricIndex: 0, //当前正在播放歌词的下标
     musicList: [],
     musicPlayId: 0, //这在播放这首歌的 音乐ID
     musicPlayState: false, //音乐是否在播放
@@ -10,6 +13,15 @@ const state = {
 }
 const getters = {}
 const mutations = {
+    VOLUME(state, num) {
+        state.volume = num
+    },
+    LYRIC_LIST(state, list) {
+        state.lyriclist = list
+    },
+    LYRIC_INDEX(state, index) {
+        state.lyricIndex = index
+    },
     MUSCIC_LIST(state, list) {
         state.musicList.unshift(list)
     },

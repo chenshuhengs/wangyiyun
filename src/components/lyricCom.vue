@@ -1,22 +1,31 @@
 <template>
     <section class="scroller" ref="scroller">
-        <h5>{{ lyricInit[0].name }}</h5>
-        <ul class="singer">
-            <li v-for="(item, index) in lyricInit[0].ar" :key="index">{{ item.name }}</li>
-        </ul>
-        <ul class="lyriclist">
-            <li v-for="(item, index) in lyriclist" :key="index">{{ item.content }}</li>
+        <header>
+            <h5>{{ lyricInit[0].name }}</h5>
+            <ul class="singer">
+                <li v-for="(item, index) in lyricInit[0].ar" :key="index">{{ item.name }}</li>
+            </ul>
+        </header>
+        <ul class="lyriclist" ref="lyricUL">
+            <li
+                v-for="(item, index) in lyriclist"
+                :data-index="index"
+                :style="{ color: lyricIndex === index ? 'skyblue' : '' }"
+                :key="index"
+                ref="lyric"
+            >
+                {{ item.content }}
+            </li>
         </ul>
     </section>
 </template>
 
 <script>
     import BScroll from '@better-scroll/core'
-    import ScrollBar from '@better-scroll/scroll-bar'
-    import MouseWheel from '@better-scroll/mouse-wheel'
+    import { createNamespacedHelpers } from 'vuex'
+    const playMusicStore = createNamespacedHelpers('playMusicStore')
     import lyricParser from '@/utils/lyricsScrolling'
-    BScroll.use(ScrollBar)
-    BScroll.use(MouseWheel)
+
     const defaultOptions = {
         mouseWheel: true,
         scrollY: true,
@@ -35,9 +44,7 @@
         },
         data() {
             return {
-                currentLyric: '',
                 lyriclist: [],
-                tlyriclist: [],
             }
         },
         watch: {
@@ -45,38 +52,65 @@
                 handler(newVal, oldVal) {
                     const { lyric, tlyric } = lyricParser(newVal)
                     this.lyriclist = lyric
-                    this.tlyriclist = tlyric
+                },
+                deep: true,
+                immediate: true,
+            },
+            musicPlayingTime: {
+                handler(newVal, oldVal) {
+                    let bs = new BScroll(this.$refs.lyricUL, defaultOptions)
+                    if (newVal) {
+                        for (let i = 0; i < this.lyriclist.length; i++) {
+                            if (parseInt(newVal.split(':')[1] * 60) + parseInt(newVal.split(':')[2]) >= parseInt(this.lyriclist[i].time)) {
+                                const index = this.$refs.lyric[i].dataset.index
+                                if (i === parseInt(index)) {
+                                    this.LYRIC_INDEX(i)
+                                }
+                            }
+                        }
+                    }
                 },
                 deep: true,
                 immediate: true,
             },
         },
-        methods: {},
+        methods: {
+            ...playMusicStore.mapMutations(['LYRIC_INDEX']),
+        },
+        computed: {
+            ...playMusicStore.mapState(['lyricIndex', 'musicPlayingTime']),
+        },
     }
 </script>
 
 <style lang="less" scoped>
     .scroller {
         height: 100%;
-        h5 {
-            font-size: 22px;
-            font-weight: 600;
-        }
-        .singer {
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            height: 10%;
+        header {
+            h5 {
+                font-size: 22px;
+                font-weight: 600;
+            }
+            .singer {
+                display: flex;
+                justify-content: center;
+                height: 50px;
+                line-height: 50px;
+
+                z-index: 999;
+                margin: 0;
+            }
         }
         .lyriclist {
             height: 90%;
-            padding: 20px 0;
+            // margin-top: 30px;
             overflow: hidden;
             overflow-y: scroll;
             text-align: center;
             line-height: 30px;
             white-space: nowrap;
             color: #757272;
+            position: relative;
             mask-image: linear-gradient(
                 180deg,
                 rgba(255, 255, 255, 0) 0,

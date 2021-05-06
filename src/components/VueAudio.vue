@@ -75,7 +75,6 @@
             },
             onTimeupdate(event) {
                 this.audio.currentTime = parseInt(event.target.currentTime)
-
                 this.sliderTime = parseInt((this.audio.currentTime / this.audio.maxTime) * 100)
                 this.audio.currentTime ? this.MUSIC_PLAYING_TIME(realFormatSecond(parseInt(event.target.currentTime))) : ''
             },
@@ -90,6 +89,9 @@
             changeCurrentTime(index) {
                 this.$refs.audio.currentTime = parseInt((index / 100) * this.audio.maxTime)
             },
+        },
+        computed: {
+            ...playMusicStore.mapState(['lyriclist']),
         },
     }
     // 将整数转换成 时：分：秒的格式

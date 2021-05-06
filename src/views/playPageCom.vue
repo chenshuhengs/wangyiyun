@@ -29,6 +29,7 @@
     import { getLyric } from '@/api/music'
     import { getSongDetail } from '@/api/songsheet'
     import { createNamespacedHelpers } from 'vuex'
+    import lyricParser from '@/utils/lyricsScrolling'
     const playMusicStore = createNamespacedHelpers('playMusicStore')
     export default {
         name: 'playPageCom',
@@ -39,13 +40,14 @@
                 lyricInit: [], //歌曲详情
                 imgUrl: '',
                 musicName: '',
+                lyriclist: '',
             }
         },
         computed: {
             ...playMusicStore.mapState(['musicPlayId', 'musicPlayState', 'musicPageState']),
         },
         methods: {
-            ...playMusicStore.mapMutations(['MUSIC_PAGE_STATE']),
+            ...playMusicStore.mapMutations(['LYRIC_LIST', 'MUSIC_PAGE_STATE']),
             // closePage() {
             //     this.MUSIC_PAGE_STATE(false)
             // },
@@ -54,6 +56,8 @@
             musicPlayId(newData, oldData) {
                 getLyric({ id: newData }).then(res => {
                     this.lyric = res.data
+
+                    // this.LYRIC_LIST(lyric)
                 })
                 getSongDetail({ ids: newData }).then(res => {
                     this.imgUrl = res.data.songs[0].al.picUrl

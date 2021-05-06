@@ -23,7 +23,13 @@
             <div class="center">
                 <VueAudio :http="http"></VueAudio>
             </div>
-            <div class="right"></div>
+            <div class="right">
+                <div v-if="musicInit" class="volume">
+                    <i class="iconfont icon-lababucuodsf-copy" v-if="volume" @click="mute"></i>
+                    <i v-else class="iconfont icon-jingyin" @click="setVolume"></i>
+                    <el-slider :value="volume" :format-tooltip="formatTooltip"></el-slider>
+                </div>
+            </div>
         </div>
     </section>
 </template>
@@ -72,13 +78,22 @@
             })
         },
         methods: {
-            ...playMusicStore.mapMutations(['MUSCI_PLAY_ID', 'MUSIC_PAGE_STATE']),
+            ...playMusicStore.mapMutations(['VOLUME', 'MUSCI_PLAY_ID', 'MUSIC_PAGE_STATE']),
+            mute() {
+                this.VOLUME(0)
+            },
+            setVolume() {
+                this.VOLUME(50)
+            },
             playInterface() {
                 this.MUSIC_PAGE_STATE(true)
             },
+            formatTooltip(value) {
+                this.VOLUME(value)
+            },
         },
         computed: {
-            ...playMusicStore.mapState(['musicList', 'musicPlayingTime', 'totalDurationOfMusic']),
+            ...playMusicStore.mapState(['volume', 'musicList', 'musicPlayingTime', 'totalDurationOfMusic']),
         },
     }
 </script>
@@ -129,6 +144,24 @@
             }
             .right {
                 width: 30%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .volume {
+                    width: 30%;
+                    display: flex;
+                    align-items: center;
+                    i {
+                        font-size: 20px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                    /deep/ .el-slider {
+                        margin-left: 10px;
+                        width: 100%;
+                    }
+                }
             }
         }
     }
